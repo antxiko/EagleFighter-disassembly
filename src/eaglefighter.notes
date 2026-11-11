@@ -1,0 +1,2266 @@
+# EAGLE FIGHTER (Casio, 1985) - anotaciones
+L 0x974E sonido_prepara            Lo del sonido a cero (0x975A) y 0xE083 = 0xE084 = 2
+L 0x975A sonido_cero               0xE080-0xE082 y 0xE085-0xE087 a cero
+L 0x976E puntos_cero               Los puntos (0xE00C-0xE00E, BCD) a cero
+L 0x9779 vidas_pinta               Las vidas (0xE00B) en la tabla de nombres (0x18DD), en una cifra
+C 0x977C la fila 6, columna 29
+C 0x977F WRTVRM
+L 0x9783 marcador_pinta            Las seis cifras de los puntos (0xE001) en 0x189A y las del record (0xE089) en 0x185A
+C 0x9786 la fila 4, columna 26
+C 0x9789 seis cifras
+C 0x978C LDIRVM
+C 0x978F el record
+C 0x9792 la fila 2, columna 26
+L 0x979B puntos_suma               Los puntos + A (BCD) en las dos ultimas cifras (0xE00E); con acarreo, 0x97A8 con 1
+C 0x979C las dos ultimas
+C 0x97A0 en BCD
+C 0x97A4 sin acarreo: a pintar
+C 0x97A6 acarreo: 1 a las centenas
+L 0x97A8 puntos_suma_cien          Los puntos + A centenas (0xE00D, BCD); con acarreo, una decena de millar mas (0xE00C) y, al pasar de impar a par (cada 20.000), una vida mas hasta 9
+C 0x97A9 las centenas
+C 0x97AD en BCD
+C 0x97B1 sin acarreo: a pintar
+C 0x97B3 las decenas de millar
+C 0x97B6 impares?
+C 0x97BA las vidas...
+C 0x97BD ...hasta 9
+C 0x97C1 una mas
+C 0x97C6 pintadas
+L 0x97CA puntos_suma_mil
+C 0x97CA + 1...
+C 0x97D1 ...en BCD
+L 0x97D7 puntos_pinta              Las cifras de los puntos y el record
+C 0x97D7 las cifras
+C 0x97DA el record
+L 0x97DE puntos_cifras             Los tres bytes BCD de los puntos (0xE00C) en seis cifras (0xE001), una por byte
+C 0x97DE las cifras
+C 0x97E1 los bytes BCD
+C 0x97E4 tres
+L 0x97E6 cifras_bcd                B bytes BCD de DE a cifras en HL (dos por byte)
+C 0x97E6 un byte
+C 0x97E8 la cifra alta
+C 0x97EE apuntada
+C 0x97F0 la baja
+C 0x97F5 el siguiente
+L 0x97F9 record_mira               Si los puntos (0xE00C) pasan del record (0xE08F), son el record nuevo y sus cifras (0xE089)
+C 0x97F9 el record
+C 0x97FC los puntos
+C 0x97FF el byte alto...
+C 0x9801 ...contra el de los puntos
+C 0x9803 menor: nada
+C 0x9804 mayor: record nuevo
+C 0x9806 iguales: el siguiente
+C 0x980C menor: nada
+C 0x9815 menor: nada
+L 0x9818 record_nuevo_3
+L 0x981A record_nuevo_2
+L 0x981C record_nuevo              Los tres bytes, hacia atras
+C 0x981C tres bytes...
+C 0x981F ...hacia atras
+C 0x9821 sus cifras
+L 0x982B ram_borra                 0xE100-0xEEFF (0xE00 bytes) a cero
+C 0x982B desde 0xE100
+C 0x982E 0xE00 bytes
+C 0x9831 a 0x9839 (los 6 bytes de 0x9833 no se ejecutan)
+D 0x9833 0x9839 ram_borra_hueco     Seis bytes que salta el "jr" de 0x9831: "ld hl,0xE100 / ld bc,0x0E00" otra vez, las mismas dos instrucciones de antes (sin ejecutar)
+L 0x9839 ram_borra_byte
+C 0x9839 a cero
+L 0x9842 nombres_borra             La tabla de nombres (0x1800, 0x300) a la casilla 0x10 y 0x963D
+C 0x9842 la casilla 0x10
+C 0x9844 la tabla de nombres
+C 0x984A FILVRM
+L 0x9850 letras_cifras             La fuente de la BIOS desde el "0" (0x1D3F, 48 letras) a la VRAM DE
+C 0x9850 desde el "0"
+C 0x9853 0x180 bytes
+L 0x9859 letras_signos             La fuente de la BIOS desde el espacio (0x1CBF, 16 signos) a la VRAM DE
+C 0x9859 desde el espacio
+L 0x9862 vram_a800                 0x600 bytes de 0xA800 a la VRAM DE
+L 0x986B vram_b000                 0x600 bytes de 0xB000 a la VRAM DE
+L 0x9874 vram_ocho                 Ocho bytes de A en la VRAM HL
+C 0x9877 FILVRM
+L 0x987A sprites_dibujos           Los dibujos de los sprites: 0x800 bytes de 0xB800 a 0x3800
+L 0x988F sprites_vram              Los atributos de los sprites (0xE100, 128 bytes) a la VRAM (0x1B00)
+C 0x988F la tabla de atributos
+C 0x9892 desde 0xE100
+C 0x9898 LDIRVM
+L 0x989B sonido_para               0xA3A9, 0xE2BD-0xE2C2 a cero, 0xE088 = 0xFF y 0xA340
+C 0x989E seis bytes
+C 0x98A8 0xE088 = 0xFF
+L 0x996D interrupcion              La interrupcion (H.TIMI): 16 cuentas de cuadros (0xE010-0xE01F) una mas; jugando (0xE000), los botones (0xE040, 0xE044) y la palanca (0xE198: el mando 0 + el 1); en la demostracion (0xE048), la palanca la pone el juego
+C 0x996D las 16 cuentas
+C 0x9972 una mas
+C 0x9976 jugando?
+C 0x997C el boton 1 del mando: 0xE040 recien pulsado, 0xE041 sostenido
+C 0x9985 la barra: 0xE044, 0xE045
+L 0x998E palanca_lee
+C 0x998E GTSTCK 0: los cursores
+C 0x9995 GTSTCK 1: el mando
+C 0x999E los dos sumados
+C 0x999F la palanca
+L 0x99A3 interrupcion_demo         Sin jugar: en el titulo, el boton o la barra (0x99F3); en la demostracion, la palanca: arriba hasta que la nave sube (0xE19E 0x5E), luego 5; despues, cada 16 cuadros una al azar (R) y el disparo cada 6
+C 0x99A3 la demostracion?
+C 0x99A9 el titulo: el boton o la barra
+L 0x99AE interrupcion_demo_va
+C 0x99B1 0xE19E: 0x5E?
+C 0x99B8 arriba
+L 0x99BE interrupcion_demo_5
+C 0x99BE 0xE19F?
+C 0x99C5 la palanca 5 y el boton
+L 0x99CE interrupcion_demo_tiro
+C 0x99CE cada 6 cuadros...
+C 0x99D9 ...el boton
+L 0x99DD interrupcion_demo_azar
+C 0x99DD cada 16 cuadros...
+C 0x99E7 ...una palanca al azar (R / 16)
+L 0x99F3 empieza_mira              El boton o la barra en el titulo: 0xE046 si se pulsa uno de los dos
+C 0x99F3 la barra
+C 0x99FC guardada
+C 0x9A00 el boton
+C 0x9A08 uno de los dos
+L 0x9A0E boton_lee                 GTTRIG 1 (el boton del mando): (DE) = 1 y (HL) = 1 si se acaba de pulsar; suelto, (HL) = 0
+C 0x9A10 GTTRIG
+C 0x9A14 pulsado?
+L 0x9A16 boton_suelto
+L 0x9A19 boton_pulsado
+C 0x9A19 ya sostenido?
+C 0x9A1D sostenido
+C 0x9A1E recien pulsado
+L 0x9A20 barra_lee                 La barra (fila 8, bit 0): lo mismo
+C 0x9A22 SNSMAT
+C 0x9A25 el bit 0: pulsada = 0
+D 0x9886 0x988F vram_ae00           Codigo que nada llama (ningun salto ni puntero): "ld hl,0xAE00 / ld bc,0x0160 / jp LDIRVM", 0x160 bytes de 0xAE00 a la VRAM DE
+L 0x8010 init                      El arranque: la pila, la interrupcion en H.TIMI, SCREEN 2, las letras de la BIOS en los tres tercios, los colores, los sprites y el titulo
+C 0x8010 sin interrupciones
+C 0x8011 DISSCR
+C 0x8042 ...en H.TIMI...
+C 0x8045 ...con su "jp"
+C 0x8047 ...0xFD9F
+C 0x804A SETGRP: SCREEN 2
+C 0x804D fondo y borde negros...
+C 0x804E BAKCLR = 0
+C 0x8051 BDRCLR = 0
+C 0x8054 ...letras blancas (0xFF)
+C 0x8055 FORCLR = 0xFF
+C 0x8058 CHGCLR
+C 0x805B las letras de la BIOS ("0" a "_", 0x30-0x5F: 0x1D3F = 0x1BBF + 0x30 x 8, la direccion fija de la BIOS japonesa) a las casillas 0-0x2F, en los tres tercios
+C 0xA0DA 3: sigue
+C 0xA0DF los bits de vuelta
+C 0xA0E8 acabado
+L 0xA122 canal_a_trabajo           Copia el bloque del canal (HL, 18 bytes) a 0xE2C3
+C 0xA122 al canal de trabajo
+L 0xA125 copia18
+C 0xA125 18 bytes
+L 0xA12B canal_de_trabajo          Y de vuelta a DE
+L 0xA130 canal_paso                Un paso del canal de trabajo: si la nota sigue, nada; si no, el byte siguiente de la pieza: una nota (menos de 0xF0) o una orden
+C 0xA130 la nota sigue?
+C 0xA137 su cuenta
+C 0xA151 el canal con tono, sin ruido
+L 0xA158 canal_mezcla
+C 0xA159 corrido al canal
+L 0xA161 canal_mezcla_corre
+L 0xA164 canal_mezcla_pon
+C 0xA164 el registro 7
+C 0xA170 0xFF: el final
+L 0xA177 canal_orden_f7
+C 0xA177 0xF7: callar
+L 0xA17E canal_orden_fe
+C 0xA17E 0xFE: al principio
+C 0xA237 un paso menos
+C 0xA23E otra vez la espera
+C 0xA244 el periodo...
+C 0xA248 ...mas el paso
+L 0xA25A ruido_pon                 El ruido: su periodo fijo o con barrido (periodo, cuantas veces, cada cuanto, el paso)
+C 0xA25A la nota
+C 0xA25E con barrido?
+C 0xA266 el periodo...
+C 0xA26A ...registro 6
+C 0xA26D sin barrido
+C 0xA27A hay ruido
+L 0xA27F ruido_barre
+C 0xA27F hay ruido con barrido
+C 0xA286 el periodo...
+C 0xA28A ...registro 6
+C 0xA2A6 15: la envolvente corta
+C 0xA2AB la cuenta de la envolvente
+C 0xA2AF la espera...
+C 0xA2B1 ...otra vez
+C 0xA2B3 el volumen, uno menos
+C 0xA2B5 al PSG
+L 0xA2BE canal_cuenta_sigue
+L 0xA2C0 canal_cuenta_15
+C 0xA2C1 la cuenta
+C 0xA2C6 el volumen a 0
+L 0xA2D1 nota_pon                  Una nota: el byte de arriba es la duracion (0xA539, o el byte siguiente con 0xE), el de abajo el volumen (15: la mitad)
+C 0xA2D1 la nota...
+C 0xA2D5 ...el volumen (la mitad baja)
+C 0xA2DA la duracion (la mitad alta)...
+C 0xA2E1 ...0xE: en el byte siguiente
+C 0xA2E5 la tabla de duraciones
+L 0xA2EC nota_duracion
+C 0xA2ED la duracion
+L 0xA2F0 nota_duracion_byte
+L 0xA2F2 nota_volumen
+C 0xA2F5 volumen 15?
+C 0xA2FC la duracion...
+C 0xA301 ...menos la mitad: la espera
+L 0xA307 nota_cuenta
+C 0xA307 la cuenta de la envolvente
+C 0xA30A el volumen 15
+L 0xA331 psg_c                     WRTPSG: el registro C
+C 0xA331 el valor...
+C 0xA332 ...el registro C
+L 0xA36A canales_bc                Los canales B y C desde la tabla HL
+C 0xA36A el canal B: su pieza...
+C 0xA36D ...y su principio
+C 0xA376 el canal C
+C 0xA381 sin nota en marcha
+C 0xA3CF sin nota en marcha
+C 0xA3D3 el pedido, gastado
+C 0xA3D6 el canal A con tono
+L 0xA000 sonido_a_pide             Pide el efecto A del canal A (0xE2C0): si ya hay uno pedido de numero menor, gana el menor
+C 0xA001 el pedido
+C 0xA004 ninguno?
+C 0xA007 menor que el nuevo?
+L 0xA00B sonido_a_pon
+C 0xA00C pedido
+L 0xA010 sonido_bc_pide            Pide el efecto A de los canales B y C (0xE2C2), con la misma prioridad; el 4, solo jugando
+C 0xA011 el 4...
+C 0xA015 ...solo jugando
+L 0xA01A sonido_bc_mira
+C 0xA01A el pedido
+C 0xA020 menor que el nuevo?
+L 0xA024 sonido_bc_pon
+C 0xA025 pedido
+L 0xA029 musica_pide               Pide la musica A (0xE2BE), con la misma prioridad; salvo la 1 y la 3, solo jugando
+C 0xA02A la 1...
+C 0xA02E ...o la 3: siempre
+C 0xA032 las otras, solo jugando
+L 0xA037 musica_mira
+C 0xA037 la pedida
+C 0xA03D menor que la nueva?
+L 0xA041 musica_pon
+C 0xA042 pedida
+L 0xA046 sonido                    El sonido de cada cuadro: los pedidos (la musica 0xE2BE en los tres canales, el efecto del canal A 0xE2C0, el de B y C 0xE2C2) empiezan si ganan a lo que suena (0xE2BD, 0xE2BF, 0xE2C1); despues un paso de cada canal (A en 0xE280, B en 0xE292, C en 0xE2A4) y el barrido del ruido
+C 0xA046 la musica sonando?
+C 0xA04D una pedida?
+C 0xA04F empieza
+C 0xA052 el efecto A sonando?
+C 0xA056 uno pedido?
+C 0xA058 empieza
+L 0xA05B sonido_bc_mira2
+C 0xA05C el de B y C sonando?
+C 0xA060 uno pedido?
+C 0xA062 empieza
+L 0xA065 sonido_musica_gana
+C 0xA065 la pedida gana a la que suena?
+L 0xA06D sonido_a_gana
+C 0xA06D el pedido gana?
+L 0xA075 sonido_bc_gana
+C 0xA075 el pedido gana?
+L 0xA07B sonido_canal_a            El canal A: con la musica o el efecto A, un paso (0xA130); al acabar la pieza (1), la musica sigue o se acaba (0xA399); con 0xF7 (2), el efecto se acaba (0xA3E7)
+C 0xA07B la musica?
+C 0xA081 o el efecto A?
+C 0xA088 el canal A...
+C 0xA08B ...al de trabajo
+C 0xA08E los registros 0 y 1, volumen el 8
+C 0xA091 el canal 0
+C 0xA095 un paso
+C 0xA099 de vuelta
+C 0xA0A0 0: sigue
+C 0xA0A3 1: acabada
+C 0xA0A8 2: callada
+L 0xA0AD sonido_canal_b            Los canales B y C: con la musica o el efecto de B y C, un paso de cada uno (los registros 2-3 y 9, 4-5 y 10); al acabar, 0xA447
+C 0xA0AD la musica?
+C 0xA0B3 o el efecto de B y C?
+C 0xA0BA el canal B
+C 0xA0C0 los registros 2 y 3, volumen el 9
+C 0xA0C3 los bits del mezclador, corridos al canal B
+C 0xA0CA el canal 1
+C 0xA0CF un paso
+C 0xA0D3 de vuelta
+L 0xA0EB sonido_canal_c
+C 0xA0EB el canal C
+C 0xA0F1 los registros 4 y 5, volumen el 10
+C 0xA0F4 los bits del mezclador, corridos al canal C
+C 0xA0FC el canal 2
+C 0xA101 un paso
+C 0xA105 de vuelta
+C 0xA10C 3: sigue
+C 0xA112 los bits de vuelta
+C 0xA11B acabado
+C 0xA11C a 0xA447
+L 0xA1F2 canal_orden_f8           0xF8: el final del tercer bucle: otra vez desde 0xF9 mientras quede cuenta
+C 0xA1F2 una vuelta menos
+L 0xA1FE canal_f8_otra
+C 0xA1FE otra vez desde su principio
+L 0xA207 canal_ruido               0xF0: una nota de ruido (0xA25A, el periodo y el barrido), su duracion y el canal con ruido sin tono
+C 0xA20B la duracion y el volumen
+C 0xA20F apuntado
+C 0xA212 el mezclador: con ruido, sin tono
+L 0xA21C ruido_barrido             El barrido del ruido: con ruido de barrido (0xE2B6, 0xE2B7) y pasos que quedan (0xE2B9), cada 0xE2BA cuadros el periodo (registro 6) + el paso (0xE2BC)
+C 0xA21C hay ruido?
+C 0xA222 con barrido?
+C 0xA228 quedan pasos?
+C 0xA22E la espera
+L 0xA252 sonido_fin
+L 0xA253 pedido_gana               (HL) el que suena, (HL+1) el pedido: Z sin pedido; C si el pedido es de numero menor (gana)
+C 0xA253 el que suena
+C 0xA255 el pedido
+C 0xA257 ninguno: Z
+C 0xA258 C si gana
+C 0xA25F con barrido (cuantas veces)?
+L 0xA29B canal_cuenta              La nota que suena: su duracion una menos (al acabar, 1); el volumen baja uno cada tantos cuadros (la envolvente); con 15, a la mitad de la duracion se calla
+C 0xA29B la duracion
+C 0xA29C una menos
+C 0xA2A1 la envolvente
+C 0xA2A2 ninguna: sigue
+C 0xA2BB volumen 0: sin envolvente
+L 0xA2CB canal_cuenta_fin
+C 0xA2CB acabada
+C 0xA2CE 1
+L 0xA313 nota_tono                 El tono de la nota: un byte de periodo bajo (0x10 o mas) o dos (el alto y el bajo), al registro B (+1 el alto)
+C 0xA314 el primer byte
+C 0xA315 menos de 0x10: el alto
+C 0xA319 al registro B + 1
+C 0xA31D el bajo
+C 0xA31E al registro B
+D 0xA323 0xA331 duraciones        Las 14 duraciones de las notas (la mitad alta del byte; 0xE: en el byte siguiente)
+L 0xA333 psg_pon                   WRTPSG con E el valor
+L 0xA337 psg_b                     WRTPSG: el registro B
+L 0xA33B psg_b1                    WRTPSG: el registro B + 1
+L 0xA340 mezclador                 WRTPSG: el registro 7 (el mezclador)
+L 0xA345 ruido_periodo             WRTPSG: el registro 6 (el periodo del ruido)
+L 0xA34A musica_empieza            La musica pedida (0xE2BE) empieza: sus tres piezas de la tabla 0xA466 (6 bytes por musica) en los canales A, B y C
+C 0xA34A la tabla
+C 0xA34D la pedida...
+C 0xA350 ...suena
+C 0xA353 x 6
+C 0xA35E la pieza del canal A...
+C 0xA361 ...y su principio
+C 0xA38B el pedido, gastado
+C 0xA38E el mezclador: los tres canales con tono
+C 0xA396 y un paso
+L 0xA399 musica_acaba              La pieza del canal A acabada: si hay otra musica pedida, empieza; si no, todo callado (0xA3A9)
+C 0xA399 una pedida?
+C 0xA39F ninguna suena
+C 0xA3A2 el mezclador: todo callado
+L 0xA3A9 canales_borra             Los tres canales y lo demas (0xE280, 0x43 bytes) a cero
+C 0xA3AC 0x43 bytes
+L 0xA3AE canales_borra_byte
+L 0xA3B4 sonido_a_empieza          El efecto pedido del canal A (0xE2C0) empieza: su pieza de la tabla 0xA48A (2 bytes por efecto)
+C 0xA3B4 la tabla
+C 0xA3B7 el pedido...
+C 0xA3BA ...suena
+C 0xA3BD x 2
+C 0xA3C4 la pieza...
+C 0xA3C7 ...y su principio
+C 0xA3E1 y los de B y C
+L 0xA3E7 sonido_a_acaba            El efecto del canal A acabado (0xF7): otro pedido, o el canal A callado
+C 0xA3E7 otro pedido?
+C 0xA3ED ninguno suena
+C 0xA3F0 el canal A a cero
+C 0xA3FA el mezclador: el canal A callado (bits 0 y 3)
+L 0xA406 sonido_bc_empieza         El efecto pedido de B y C (0xE2C2) empieza: sus dos piezas de la tabla 0xA494 (4 bytes por efecto)
+C 0xA406 la tabla
+C 0xA409 el pedido...
+C 0xA40C ...suena
+C 0xA40F x 4
+C 0xA418 la pieza del canal B
+C 0xA424 la del canal C
+C 0xA42F sin nota en marcha
+C 0xA436 el pedido, gastado
+C 0xA439 el mezclador: B y C con tono
+L 0xA447 sonido_bc_acaba           Los canales B y C acabados: otro pedido, o los dos callados
+C 0xA447 otro pedido?
+C 0xA44D ninguno suena
+C 0xA450 los canales B y C a cero
+C 0xA45A el mezclador: B y C callados
+L 0xA13C canal_byte                El byte siguiente de la pieza (0xE2C3): menos de 0xF0, una nota (duracion y volumen, el tono) y 3; si no, una orden
+C 0xA143 el byte
+C 0xA144 0xF0 o mas: una orden
+C 0xA148 la duracion y el volumen
+C 0xA14B el tono
+C 0xA14E apuntado
+C 0xA16A 3: nota nueva
+L 0xA16D canal_orden               Las ordenes: 0xF0 ruido, 0xFF el final (1), 0xF7 callar (2), 0xFE otra vez, 0xFD-0xFC, 0xFB-0xFA y 0xF9-0xF8 tres bucles con su cuenta
+C 0xA16D 0xF0: ruido
+C 0xA174 1
+C 0xA17B 2
+C 0xA182 la pieza otra vez desde su principio
+L 0xA18A canal_orden_fd
+C 0xA18A 0xFD n: el primer bucle, n veces
+C 0xA190 la cuenta
+C 0xA194 su principio
+L 0xA19C canal_orden_fc
+C 0xA19C 0xFC: el final del primer bucle
+C 0xA1A0 una vuelta menos
+C 0xA1A5 acabado: sigue
+L 0xA1AB canal_fc_otra
+C 0xA1AB otra vez desde su principio
+L 0xA1B3 canal_orden_fb
+C 0xA1B3 0xFB n: el segundo bucle
+C 0xA1B9 la cuenta
+C 0xA1BD su principio
+L 0xA1C6 canal_orden_fa
+C 0xA1C6 0xFA: su final
+C 0xA1CA una vuelta menos
+L 0xA1D6 canal_fa_otra
+L 0xA1DF canal_orden_f9
+C 0xA1DF 0xF9 n: el tercer bucle
+C 0xA1E5 la cuenta
+C 0xA1E9 su principio
+L 0x958E pantalla_casillas         La tabla de nombres en blanco y las casillas de la fase: 0x600 bytes de 0xA800 a los dibujos y de 0xB000 a los colores, en los tres tercios; y el sonido preparado
+C 0x958E en blanco
+C 0x9591 los dibujos desde la casilla 0x40...
+C 0x9597 ...del segundo tercio
+C 0x959D ...y del tercero
+C 0x95A3 los colores, en los tres
+L 0x95B8 espera                    Espera A cuadros (0xE011) con el sonido en marcha; en el titulo, el boton la corta (0xE046)
+C 0x95B8 cuantos
+C 0x95BB las cuentas a cero
+L 0x95C2 espera_cuadro
+C 0x95C2 jugando?
+C 0x95C8 el boton?
+L 0x95CD espera_va
+C 0x95CD un cuadro?
+C 0x95D5 a cero
+C 0x95D8 el sonido
+C 0x95DB los que tocan
+C 0x95DF los que van
+L 0x95E6 nave_cae                  La nave tocada (0xE19B): el sonido parado, la musica 3; la nave parpadea (sus dibujos cada 4 cuadros) 160 cuadros; despues una vida menos y otra vez la fase (0x821F); sin vidas, GAME OVER (0x967A)
+C 0x95E6 el sonido parado
+C 0x95E9 la nave: 6 arriba...
+C 0x95F1 ...y su segundo sprite 5 a la derecha
+C 0x95F9 la cuenta y 0xE19E a cero
+C 0x9603 la musica 3
+C 0x9608 0xE170, 16 bytes a cero
+L 0x960D nave_cae_borra
+L 0x9612 nave_cae_cuadro
+C 0x9612 lo de cada cuadro (0x82F2)
+C 0x9615 el dibujo: 0xE8 + 0, 4, 8 o 0xC
+C 0x9622 160 cuadros?
+C 0x9629 las vidas
+C 0x962C ninguna: GAME OVER
+C 0x9630 una menos
+C 0x9634 el sonido preparado
+C 0x9637 la RAM de la fase a cero
+C 0x963A otra vez
+L 0x963D sprites_borra             Los atributos de los sprites (0xE100, 127 bytes) a cero y a la VRAM
+L 0x964B game_over_pinta           GAME OVER (0x98FC) en la fila 7, columna 8, y 15 casillas en blanco (0x8C24) en la fila 8
+C 0x964B la fila 7, columna 8
+C 0x964E GAME OVER
+C 0x9654 LDIRVM
+C 0x9657 la fila 8
+C 0x965A en blanco
+L 0x9664 demo_pinta                DEMO PLAY (0x9671) en la fila 7, columna 8
+C 0x9667 DEMO PLAY
+D 0x9671 0x967A texto_demo          "DEMO PLAY" (casilla = letra - 0x30; 0x10 el espacio)
+L 0x967A game_over                 GAME OVER: el texto, la musica 2, 248 cuadros de espera; sin partida ni demostracion, al titulo (0x80B0)
+C 0x967D la musica 2
+C 0x9682 248 cuadros
+C 0x9687 sin demostracion...
+C 0x968B ...sin partida...
+C 0x968E ...sin boton
+C 0x9691 el titulo
+C 0x9694 el sonido parado
+C 0x9697 LANDING BONUS...
+C 0x969A ...en la fila 7, columna 7
+C 0x96A3 la Y de la nave - 16...
+C 0x96A8 ...para los sprites 2 y 3
+C 0x96AE X 0xB0, dibujo 0xE0, color 5
+C 0x96BA X 0xB0, dibujo 0xE4, color 6
+L 0x96C6 aterriza_cuadro
+C 0x96C6 un cuadro
+C 0x96D1 los sprites
+C 0x96DA una menos
+C 0x96E1 10 puntos
+C 0x96E6 pintados
+C 0x96E9 el sonido A 4
+C 0x96F1 los sprites 2 y 3...
+C 0x96F7 ...hasta la nave
+C 0x96FA uno mas a la izquierda
+L 0x9702 aterriza_fin
+C 0x970B la musica 4
+L 0x9710 aterriza_espera
+C 0x9710 un cuadro
+C 0x971B 0xE1A0 de cuenta
+C 0x9722 192?
+C 0x972E la fase siguiente
+C 0x9735 la 16: otra vez la 0
+D 0x9741 0x974E texto_aterriza      "LANDING BONUS"
+L 0x9701 aterriza_llega_fin
+L 0x96F1 aterriza_llega
+C 0x8014 los slots de las paginas
+C 0x8016 la pagina 2 (bits 4-5)...
+C 0x801A ...a la pagina 1 (bits 2-3)
+C 0x802A el cartucho tambien en 0x4000-0x7FFF
+C 0x802E la pila
+C 0x8031 la RAM: 0xE000...
+C 0x8034 ...0x1000 bytes...
+C 0x8037 ...a cero
+C 0x803F la interrupcion (0x996D)...
+C 0x805E en los tres tercios
+C 0x806D los signos (" " a "/") a las casillas 0x30-0x3F...
+C 0x8073 ...del segundo tercio
+C 0x8079 ...y del tercero
+C 0x807F la casilla 0x10 en blanco...
+C 0x8083 ...en los tres tercios
+C 0x8092 todos los colores...
+C 0x8098 ...blanco sobre transparente
+C 0x809A FILVRM
+C 0x809D los dibujos de los sprites
+C 0x80A0 el registro 1: 0xA2 (sprites de 16 x 16, sin pantalla)
+C 0x80A5 WRTVDP
+C 0x80B0 DISSCR
+C 0x80B3 el sonido
+C 0x80B6 la tabla de nombres
+C 0x80B9 la RAM
+C 0x80BC el sonido parado
+C 0x80C0 las casillas de la fase
+C 0x80C3 0x600 bytes de 0x6000...
+C 0x80C6 ...a los dibujos desde la casilla 0x40, en los tres tercios
+C 0x80E7 y 0x600 de 0x6800 a los colores
+C 0x810B ENASCR
+C 0x810E unas casillas (0x9905) en la fila 4...
+C 0x8111 ...columna 7, tres filas de 3
+C 0x812E otras (0x990E) en la columna 22
+C 0x814E el logotipo (0x9917): seis filas de 10...
+C 0x8151 ...desde la fila 3, columna 11
+C 0x818C 0x9953 en la fila 20, columna 10
+C 0x81A2 PUSH TRIGGER OR SPACE (0x98C7)...
+C 0x81A5 ...en la fila 18, columna 6
+C 0x81AE COPYRIGHT 1985 (c) CASIO (0x98DC)...
+C 0x81B1 ...en la fila 23, columna 5
+C 0x81BA la cuenta de la espera
+L 0x81BE titulo_espera
+C 0x81C6 un cuadro?
+C 0x81D1 el sonido
+L 0x81D4 titulo_cuenta
+C 0x81D4 cada 8 cuadros...
+C 0x81DF ...0x9A2A
+L 0x81E2 titulo_boton
+C 0x81E2 el boton?
+L 0x81EE demo_empieza              La demostracion: la fase 8 y 0xE048 = 1
+C 0x81EE la fase 8
+C 0x81F3 la demostracion
+L 0x81FA partida_empieza           La partida: jugando (0xE000 = 1), dos vidas, los puntos a cero y la fase 0
+C 0x81FA sin demostracion
+C 0x8201 jugando
+C 0x8206 dos vidas
+C 0x820B las cifras de los puntos (0xE001, 6) a cero
+C 0x8215 los puntos a cero
+C 0x8218 la fase 0
+L 0x821C fase_empieza              Una fase: las casillas, la RAM, los sprites; la nave (sprites 0 y 1 en 0xE100: Y 0xB0, X 0x60 y 0x50, dibujos 0 y 4, color 6)...
+L 0x821F fase_otra
+C 0x821F DISSCR
+C 0x822B la nave...
+C 0x822F ...Y 0xB0, X 0x60, dibujo 0, color 6...
+C 0x823F ...y su segundo sprite, X 0x50, dibujo 4
+C 0x824F el marcador
+C 0x80A8 el record: 10.000 (0xE08F = 0x01)...
+C 0x80AD ...y su cifra (0xE08A)
+C 0x81BE 0xE018 a 255?
+L 0x80B0 titulo                    El titulo: la pantalla en blanco, el sonido y la RAM a cero, las casillas del titulo (0x6000 a los dibujos y 0x6800 a los colores de los tres tercios), los textos y el logotipo; espera hasta que 0xE018 llega a 255: el boton empieza la partida (0x81FA) y si no, la demostracion (0x81EE)
+D 0xA466 0xA48A musicas            Las 6 musicas (6 bytes: las piezas de los canales A, B y C): la 0 en silencio; la 1 al empezar la fase (0x8296), la 2 GAME OVER (0x967D), la 3 la nave tocada (0x9603), la 4 el aterrizaje (0x970B); la 5 no la pide nadie (las cuatro llamadas a musica_pide llevan 1-4)
+D 0xA48A 0xA494 sonidos_a          Los 5 efectos del canal A (2 bytes: su pieza); el 0 en silencio
+D 0xA494 0xA4B4 sonidos_bc         Los 8 efectos de los canales B y C (4 bytes: las piezas de B y de C); el 0 en silencio
+D 0xA4B4 0xA65F piezas             Las piezas: notas (la duracion en la mitad alta, el volumen en la baja, el tono en uno o dos bytes) y las ordenes 0xF0-0xFF
+L 0x9A2A titulo_avion              En el titulo, cada 8 cuadros: el avion de cuatro filas de casillas (0x9A8D, 17 por fila) entra por la derecha una columna mas (0xE1C1), en las filas 12-15, con el sonido 7 de B y C; a 24 columnas para y se calla
+C 0x9A2A HL = - (0xE1C1 + 1)...
+C 0x9A30 ...las columnas que ya ha entrado
+C 0x9A35 la fila 12, desde la derecha
+C 0x9A3B la primera fila del avion
+C 0x9A43 la fila 13
+C 0x9A48 la segunda
+C 0x9A50 la fila 14
+C 0x9A55 la tercera
+C 0x9A5C la fila 15
+C 0x9A61 la cuarta
+C 0x9A67 una columna mas...
+C 0x9A6B ...hasta 24
+C 0x9A72 el sonido 7 de B y C
+L 0x9A78 titulo_avion_para
+C 0x9A78 el sonido parado
+L 0x9A7C titulo_avion_fila         Una fila del avion: tantas casillas como columnas ha entrado (como mucho 17), de HL a la VRAM DE
+C 0x9A7C las columnas + 1...
+C 0x9A80 ...17 como mucho
+C 0x9A89 LDIRVM
+D 0x9A8D 0x9AD1 titulo_avion_casillas  El avion del titulo: cuatro filas de 17 casillas (0x10 en blanco, 0x96-0xB9)
+C 0x8267 la tabla de 0x8548 por la fase (0xE00A)...
+C 0x8273 ...a 0xE1AB
+C 0x8290 ENASCR
+C 0x8293 los sprites
+C 0x8296 la musica 1: la fase empieza
+C 0x829B 128 cuadros de espera
+L 0x82A6 partida_bucle             El bucle de la fase: lo de cada cuadro (0x82F2); estrellado (0xE19B), 0x95E6; aterrizado (0xE1AD), 0x9694; si no, el vuelo (0x8568) y, segun 0xE19D, 0x8B08 o, parado en la pista (0xE19D = 2, velocidad 0), aterrizado; en la demostracion, el boton vuelve al titulo
+C 0x82A6 lo de cada cuadro
+C 0x82A9 estrellado?
+C 0x82B0 aterrizado?
+C 0x82B7 el vuelo
+C 0x82BA 0xE19D = 1?
+C 0x82C2 la velocidad...
+C 0x82C8 ...sin estrellarse...
+C 0x82CE ...y 0xE19D = 2: aterrizado
+L 0x82DA partida_bucle_boton
+C 0x82DA jugando: otra vuelta
+C 0x82E1 la demostracion: el boton?
+C 0x82EC el sonido parado
+C 0x82EF al titulo
+L 0x82F2 cada_cuadro               Lo de cada cuadro (0xE011): 0x72D8, el marcador, el sonido, los sprites, 0x8CB5, 0x8D1A, la pista (0x8511), 0x912A, 0x9094, 0x8A89; el cartel TAKE OFF BONUS (0xE1C2); y el despegue (0xE19F = 1)
+C 0x82F2 un cuadro?
+C 0x82FF el marcador
+C 0x8302 el sonido
+C 0x8305 los sprites
+C 0x830E la pista, segun la velocidad
+C 0x831A el cartel del despegue?
+C 0x8320 un cuadro mas...
+C 0x8324 ...128?
+C 0x8328 acabado
+C 0x832C jugando: 1000 puntos
+L 0x8339 despegue_cartel           Cada 4 cuadros, TAKE OFF:BONUS 1000PTS. (0x98B0) en la fila 8 con el sonido 2 de B y C, o la fila en blanco
+C 0x833E TAKE OFF:BONUS 1000PTS.
+C 0x8341 la fila 8, columna 1
+C 0x834A el sonido 2 de B y C
+L 0x8351 despegue_cartel_borra
+C 0x8351 la fila en blanco
+L 0x835D despegue                  Rodando para despegar (0xE19F = 1): por debajo de 0x10 de velocidad, se acaba; cada 4 cuadros el avion cambia de dibujo y sube o se ladea; a 0x5A de velocidad sigue subiendo hasta 0x38 pasos: en el aire (0xE19F = 2, el cartel)
+C 0x835D despegando?
+C 0x8363 la velocidad: menos de 0x10?
+C 0x836A ya no
+L 0x836F despegue_cuadro
+C 0x836F cada 4 cuadros
+C 0x837D color 8 en los dos sprites
+C 0x8385 0xE1B1?
+C 0x838B una fila arriba
+C 0x8391 los dibujos 0x10 y 0x14
+C 0x8399 cada 4 pasos...
+C 0x83A8 ...0xE1A5 uno mas
+L 0x83AF despegue_paso
+C 0x83AF los pasos
+C 0x83B6 8?
+C 0x83B9 la velocidad de despegue (0x5A)?
+L 0x83C7 despegue_ladea            Ladeado (0xE1B3: 1 a la derecha, otro a la izquierda): los dibujos 0x28-0x2C o 0x38-0x3C y un paso de lado; recto, 0x08-0x0C; despues baja una fila y los pasos se deshacen
+C 0x83C7 ladeado?
+C 0x83CD color 6
+C 0x83D5 a la derecha?
+C 0x83D9 un paso a la derecha
+L 0x83E9 despegue_izq
+C 0x83E9 un paso a la izquierda
+L 0x83F9 despegue_recto
+L 0x8401 despegue_baja
+C 0x8401 una fila abajo
+L 0x8420 despegue_vuelve
+C 0x8423 un paso menos
+C 0x842C los pasos acabados
+C 0x8432 los dibujos 0 y 4
+C 0x843A ladeado...
+C 0x843F ...se estrella (0xE19B)
+L 0x8449 despegue_sube             A la velocidad de despegue: sigue subiendo; a los 0x1C pasos, ladeado, vuelve; recto, 0xE1AF = 0x1FE y la velocidad 0x5E; a los 0x38, en el aire
+C 0x845F 0x1C pasos?
+C 0x846A ladeado?
+C 0x8472 0xE1AF = 0x1FE
+C 0x8478 la velocidad 0x5E
+L 0x847E despegue_aire
+C 0x847E 0x38?
+C 0x8481 en el aire (0xE19F = 2)...
+C 0x8486 ...el cartel (0xE1C2 = 1)
+C 0x848F la fila 18, columna 27
+C 0x8495 cinco filas
+C 0x8497 en blanco
+C 0x8499 WRTVRM
+C 0x849F la columna 28
+L 0x8511 pista_avanza              La pista avanza segun la velocidad (0xE19E): cada 6 - velocidad / 16 cuadros (0xE014) una vez (0x9196, 0x932A); a 0x60 o mas, dos veces cada cuadro
+C 0x8511 parado: nada
+C 0x8516 / 16
+C 0x851D 6 - eso
+C 0x8524 los cuadros que van
+C 0x852D un paso
+L 0x8534 pista_rapida
+C 0x853E dos pasos
+D 0x8548 0x8568 fase_tabla         32 bytes; la fase (0xE00A, 0-15) elige uno, que va a 0xE1AB al empezar (0x8267)
+L 0x8568 vuelo                     El avion en cada cuadro: en el aire o aterrizando (0xE19F 2 o mas), 0x86E5; en la pista, el ruido del motor (B y C: 7 despacio, 6 desde 0x4C de velocidad, 5 despegando), el color que parpadea, la velocidad (0x85AB) y el paso de lado (0x861F)
+C 0x8568 en el aire?
+C 0x8570 despegando?
+C 0x8573 la velocidad: 0x4C?
+C 0x857A el sonido 6
+L 0x857E vuelo_despega
+C 0x857E el sonido 5
+L 0x8584 vuelo_despacio
+C 0x8584 el sonido 7
+L 0x8586 vuelo_pista
+C 0x8589 cada 2 de 4 cuadros...
+C 0x8592 ...color 5...
+L 0x859C vuelo_color6
+C 0x859C ...o 6
+L 0x85A4 vuelo_mueve
+C 0x85A4 la velocidad
+C 0x85A7 el paso de lado
+L 0x85AB velocidad                 Cada 8 cuadros, con la palanca: arriba (1, 2 u 8), una mas hasta 0x60; abajo (4, 5 o 6), frena dos; si no, una menos cada 4 veces
+C 0x85AB 8 cuadros?
+C 0x85B5 la palanca: arriba...
+C 0x85BC ...arriba a la derecha...
+C 0x85C0 ...o arriba a la izquierda?
+L 0x85C6 velocidad_mas
+C 0x85C6 los botones gastados
+C 0x85CD 0x60 como mucho
+C 0x85D3 una mas
+L 0x85D8 velocidad_abajo
+C 0x85D8 abajo...
+C 0x85DC ...abajo a la derecha...
+C 0x85E0 ...o abajo a la izquierda?
+L 0x85E6 velocidad_frena
+C 0x85E6 despegando: nada
+C 0x85EE parado
+C 0x85F0 dos menos
+C 0x85F2 por debajo de 0: 0
+L 0x85F7 velocidad_pon
+L 0x85FB velocidad_suelta
+C 0x85FB los botones gastados
+C 0x8602 despegando: nada
+C 0x8607 cada 4 veces...
+C 0x861A ...una menos
+L 0x861F pista_lado                Cada 7 - velocidad / 16 cuadros (0xE013): en la pista, fuera de ella (X por debajo de 0x1E o desde 0xA2) se estrella; en los bordes (0x1E-0x2A y 0x94-0xA1), 0xE1A1 = 2 o 1 y 0x8C7A; despues el viento (0x88CF) y la palanca: a la derecha (2, 3 o 4) o a la izquierda (6, 7 u 8), un paso; con la palanca abajo (5) y el boton, despega (0xE19F = 1)
+C 0x862D los cuadros que van
+C 0x8636 en el aire?
+C 0x863D la X del avion
+C 0x8640 fuera por la izquierda?
+C 0x8645 fuera por la derecha?
+C 0x864A el borde izquierdo?
+C 0x864E en medio?
+L 0x8652 pista_borde_der
+C 0x8652 en el borde: 2
+L 0x865C pista_fuera
+C 0x865C se estrella
+L 0x8662 pista_borde_izq
+C 0x8662 en el borde: 1
+L 0x866A pista_palanca
+C 0x866A el viento
+C 0x866D la palanca: 2...
+L 0x8676 pista_palanca3
+L 0x867C pista_palanca4
+L 0x8682 pista_palanca5
+C 0x8682 5: abajo
+C 0x8686 despegando: nada
+C 0x868B 0xE1C9 = 3: nada
+C 0x8691 el boton?
+L 0x869B despega_empieza           Despega (0xE19F = 1); ladeado segun su X: en el centro de la pista (0x5B-0x65), recto (0xE1B3 = 0); a la izquierda 2, a la derecha 1
+C 0x869C despegando
+C 0x869F su X
+L 0x86B0 despega_izq
+L 0x86B6 despega_recto
+L 0x86BB despega_barra
+C 0x86BB o la barra?
+L 0x86C6 pista_palanca6
+L 0x86CC pista_palanca7
+L 0x86D2 pista_palanca8
+L 0x86D7 avion_der                 Un paso a la derecha (los dos sprites)
+L 0x86DE avion_izq                 Un paso a la izquierda
+L 0x86E5 vuelo_aire                En el aire (el sonido 5): aterrizando (0xE19F = 3) y a altura 0, en la pista: fuera del centro (0x5B-0x65) se estrella; si no, cada cuadro: los tiros (0x8934), el color, y la palanca (sin combustible, una que baja) con el dibujo del avion y sus movimientos
+C 0x86E6 el sonido 5
+C 0x86EC aterrizando?
+C 0x86F0 el viento
+C 0x86F3 la altura
+C 0x86F6 aun en el aire
+C 0x86F9 en la pista
+C 0x86FC los tiros, fuera
+C 0x871C los dibujos 0 y 4
+C 0x8724 en el centro?
+L 0x8730 aterriza_mal
+C 0x8730 fuera del centro: se estrella
+L 0x8736 vuelo_cuadro
+C 0x8736 0xE1C7 = 5: nada
+C 0x873C un cuadro?
+C 0x8746 los tiros
+C 0x8749 el color
+C 0x874C queda combustible (0xE1A0)?
+C 0x8752 sin combustible, la palanca solo baja: 1, 2 u 8
+L 0x875D vuelo_palanca2
+L 0x8765 vuelo_palanca5
+L 0x876D vuelo_palanca8
+L 0x8771 vuelo_palanca_real
+C 0x8771 la palanca
+L 0x8774 vuelo_palanca             Segun la palanca, el dibujo (sprites 0 y 1) y lo que hace: arriba baja, abajo sube, a los lados se mueve
+C 0x8794 quieta: los dibujos 8 y 0xC
+L 0x879D vuelo_abajo
+C 0x879D 5, abajo: los dibujos 0x10-0x14 y sube
+L 0x87A9 vuelo_abajo_der
+C 0x87A9 4: 0x28-0x2C, sube y a la derecha
+L 0x87B8 vuelo_der
+C 0x87B8 3: 0x20-0x24 y a la derecha
+L 0x87C4 vuelo_arriba_der
+C 0x87C4 2: 0x28-0x2C, baja y a la derecha
+L 0x87D3 vuelo_arriba
+C 0x87D3 1: 0x18-0x1C y baja
+L 0x87DF vuelo_arriba_izq
+C 0x87DF 8: 0x38-0x3C, baja y a la izquierda
+L 0x87EE vuelo_izq
+C 0x87EE 7: 0x30-0x34 y a la izquierda
+L 0x87FA vuelo_abajo_izq
+C 0x87FA 6: 0x38-0x3C, sube y a la izquierda
+L 0x8809 sube                      Sube: la altura (0xE1A5) una mas cada 4 veces, hasta 0x20 (0x2F con 0xE19D = 1); el avion una fila arriba hasta la 0x68 (0x20)
+C 0x8809 0xE19D = 1?
+C 0x8810 la altura: 0x20?
+L 0x8819 sube_alto
+C 0x8819 la altura: 0x2F?
+L 0x8820 sube_cuenta
+C 0x8820 cada 4 veces...
+C 0x882F ...una mas
+L 0x8836 sube_fila
+C 0x883D la Y: 0x68 como poco
+L 0x8843 avion_y_pon               La Y de los dos sprites del avion
+L 0x884B sube_fila_alto
+C 0x884B 0x20 como poco
+L 0x8853 baja                      Baja: la altura una menos cada 4 veces; a 0, se estrella; el avion una fila abajo hasta la 0xB0
+C 0x8853 la altura: 0?
+C 0x885A cada 4 veces...
+C 0x8869 ...una menos
+L 0x8870 baja_fila
+C 0x8870 la Y: hasta 0xB0
+L 0x887E baja_choca
+C 0x887E en el suelo: se estrella
+L 0x8884 avion_der2                Dos pasos a la derecha, hasta la X 0xAC, con el sonido 3 de B y C
+L 0x889C avion_izq2                Dos pasos a la izquierda, hasta la X 0x16, con el sonido 4 de B y C
+L 0x88B4 avion_color               Cada 2 de 4 cuadros el avion de color 15, si no 6
+L 0x88C6 avion_color6
+L 0x88CF viento                    El viento: desde 0x10 de velocidad, rachas al azar (R) que mueven el avion de lado un paso cada 2 cuadros (0xE1A7: el bit 3 el lado, lo demas cuantos)
+C 0x88CF 0x10 de velocidad?
+C 0x88D7 una racha en marcha?
+C 0x88DD una nueva...
+C 0x88E1 ...al azar
+L 0x88E8 viento_cuadro
+C 0x88E8 cada 2 cuadros
+C 0x88F7 el bit 3: a la derecha
+C 0x88FE una menos
+C 0x8906 a la izquierda, hasta 0x14
+L 0x8915 viento_der
+C 0x891D a la derecha, hasta 0xAC
+L 0x892C viento_acaba
+L 0x8933 viento_fin
+L 0x8934 tiros                     Los cuatro tiros del avion (sprites 28-31, 0xE170): con el boton o la barra sale uno libre (0xE1C3-0xE1C6) delante del avion, dibujo 0xF8, color 15, con el sonido 3 del canal A; cada cuadro suben 4 puntos y desaparecen arriba
+C 0x8934 la barra?
+C 0x893A el boton?
+L 0x8947 tiros_barra
+L 0x894B tiros_uno
+C 0x894B el primero libre?
+C 0x8955 su X: la del avion - 8
+C 0x895D su Y: la del avion - 8
+C 0x8965 dibujo 0xF8, color 15
+L 0x896F tiros_dos
+C 0x896F el segundo?
+L 0x8993 tiros_tres
+C 0x8993 el tercero?
+L 0x89B7 tiros_cuatro
+C 0x89B7 el cuarto?
+L 0x89D9 tiros_sonido
+C 0x89D9 el sonido 3 del canal A
+L 0x89DE tiros_mueve
+C 0x89DE el primero sale?
+C 0x89E4 4 puntos arriba
+C 0x89F0 arriba del todo?
+C 0x89F7 fuera
+C 0x825F el combustible: 0xC0
+L 0x9694 aterriza                  LANDING BONUS: el texto (0x9741) y dos sprites (dibujos 0xE0 y 0xE4) que llegan desde la derecha hasta el avion; cada cuadro, 10 puntos por cada unidad de combustible que queda (0xE1A0, el sonido A 4); despues la musica 4, 192 cuadros y la fase siguiente (0xE00A, 16 y vuelta a 0)
+C 0x96D4 queda combustible?
+C 0x8A04 libre
+L 0x8A09 tiros_mueve2
+C 0x8A09 el segundo sale?
+C 0x8A0F 4 puntos arriba
+C 0x8A1E arriba del todo?
+C 0x8A22 fuera
+L 0x8A34 tiros_mueve3
+C 0x8A34 el tercero?
+C 0x8A3A 4 puntos arriba
+C 0x8A4D fuera
+L 0x8A5F tiros_mueve4
+C 0x8A5F el cuarto?
+C 0x8A64 4 puntos arriba
+C 0x8A77 fuera
+L 0x8A88 tiros_fin
+L 0x8A89 aterrizaje                El aterrizaje (0xE1C9): 1, LANDING (0x8B01) en la fila 8 y 0x8ED5; en la ultima parte (0xE19D = 2), bajo (Y 0x88 o mas) y a menos de 0x17 de altura, empieza: 0xE1C9 = 2, 0xE19F = 3 y 0xE1CB = 0x60; 2, cuando 0xE1B4 llega a 0, el 3 (0xE1AE = 14, el sprite 27); despues el texto se borra a los 0x60 cuadros
+C 0x8A89 nada?
+C 0x8A8E 1?
+C 0x8A92 LANDING...
+C 0x8A95 ...en la fila 8, columna 9
+C 0x8AA1 la ultima parte?
+C 0x8AA7 la Y del avion: 0x88?
+C 0x8AAD la altura: menos de 0x17?
+C 0x8AB3 el paso 2
+C 0x8AB8 aterrizando (0xE19F = 3)
+C 0x8ABD 0x60 cuadros
+L 0x8AC3 aterrizaje2
+C 0x8AC3 2?
+C 0x8AC7 0xE1B4 a 0?
+C 0x8ACC el paso 3
+C 0x8AD1 0xE1AE = 14
+C 0x8AD9 el sprite 27: Y 0xA5, X 0xD8, dibujo 0x48, color 0
+L 0x8AEA aterrizaje_texto
+C 0x8AEA la cuenta del texto
+C 0x8AEF una menos
+C 0x8AF4 a 0: la fila en blanco
+D 0x8B01 0x8B08 texto_landing       "LANDING"
+L 0x8B08 cisterna                  Con 0xE19D = 1: cada 32 cuadros (0xE019) un avion de casillas (0x8C2F, cinco filas de 15) baja una fila mas desde arriba hasta 8 (0xE1A4); despues (0x8B5B) cuatro pasos de aviso en la fila 5 (0x8C20) y el encuentro; al acabar, sube y se va, y la ultima parte (0xE19D = 2). Es, por el codigo, el repostaje en vuelo: con el avion debajo, el combustible (0xE1A0) se llena
+C 0x8B08 bajado del todo (8)...
+C 0x8B0F ...y los avisos dados?
+C 0x8B16 cada cuadro
+L 0x8B23 cisterna_cuadro
+C 0x8B23 cada 32 cuadros
+C 0x8B2D bajando?
+C 0x8B35 dibujado con 0xE1A4 filas
+C 0x8B38 una mas
+L 0x8B40 cisterna_sube
+C 0x8B40 8: el encuentro
+C 0x8B45 15 - eso: subiendo
+C 0x8B4B una mas
+C 0x8B52 15: se ha ido
+C 0x8B55 la ultima parte
+L 0x8B5B cisterna_aviso            Cuatro avisos (0xE1C7): las casillas de 0x8C20 una a una en la fila 5, columna 12; con el cuarto, la casilla 0x6A en la fila 6
+C 0x8B5B los avisos
+C 0x8B62 uno mas
+C 0x8B67 su casilla
+C 0x8B6D la fila 5, columna 12
+C 0x8B70 WRTVRM
+C 0x8B73 el cuarto?
+C 0x8B79 la casilla 0x6A en la fila 6
+L 0x8B82 cisterna_encuentro        Con los cuatro avisos: el viento; demasiado arriba (Y menos de 0x25) y no en el centro, se estrella; a la altura (0x25-0x2F), en el centro (X 0x63-0x65) y con la palanca abajo (5), empieza (0xE1C7 = 5)
+C 0x8B86 el viento
+C 0x8B89 la Y del avion
+C 0x8B8C muy arriba?
+C 0x8B90 la X: fuera del centro...
+C 0x8B99 ...se estrella
+L 0x8B9F cisterna_alto
+C 0x8B9F 0x25-0x2F?
+C 0x8BA2 la X: 0x63-0x65?
+C 0x8BAB la palanca abajo?
+C 0x8BB1 enganchado (5)
+L 0x8BB6 cisterna_llena            Enganchado: cada 3 cuadros, el combustible uno mas (su barra, el sonido 2 del canal A) hasta 0xC0; lleno, se suelta (0xE1A4 = 9: se va) y las casillas de la fila 5 y 6 vuelven
+C 0x8BB6 cada 3 cuadros
+C 0x8BC0 el color del avion
+C 0x8BC3 los sprites
+C 0x8BC6 el combustible...
+C 0x8BC9 ...uno mas
+C 0x8BCD su barra
+C 0x8BD0 el sonido 2 del canal A
+C 0x8BD8 lleno (0xC0)?
+C 0x8BDE suelto
+C 0x8BE2 se va
+C 0x8BE7 la casilla 0x82 en la fila 5
+C 0x8BEF y la fila 6 en blanco
+L 0x8BF8 cisterna_pinta            El avion de 0x8C2F con A filas (las de abajo primero), desde la fila A + 1 de la columna 5 hacia arriba: 15 casillas por fila, cinco como mucho
+C 0x8BF8 la fila 0, columna 5, menos una
+C 0x8BFE A filas abajo
+C 0x8C06 las casillas
+L 0x8C09 cisterna_fila
+C 0x8C0B 15 casillas
+C 0x8C0E LDIRVM
+C 0x8C12 una mas
+C 0x8C14 cinco: ya
+C 0x8C18 la fila de arriba
+D 0x8C20 0x8C2F cisterna_datos      Las cuatro casillas de los avisos (0x8C20) y 11 en blanco (0x8C24): con las primeras del dibujo de despues, que tambien estan en blanco, son la fila de 23 blancos que borra los textos (0x8351, 0x965A, 0x8AF7)
+D 0x8C2F 0x8C7A cisterna_casillas   El avion de casillas: cinco filas de 15 (0xA8-0xBC)
+L 0x8C7A pista_bache               En el borde de la pista (0xE1A1: 1 o 2), el avion da botes: un cuadro una o dos filas abajo y el siguiente otra vez arriba
+C 0x8C7A en el borde?
+C 0x8C7F arriba o abajo?
+C 0x8C85 abajo
+C 0x8C89 el borde derecho: dos filas
+L 0x8C96 pista_bache_uno
+L 0x8C9D pista_bache_vuelve
+C 0x8C9D arriba otra vez
+L 0x8CAE pista_bache_vuelve1
+L 0x8CB5 barras                    La barra de SPEED (la velocidad / 2, en 0x1939); con menos de 16 de combustible, la alarma (el sonido 1 del canal A); cada 32 cuadros, una unidad de combustible menos y su barra; sin combustible, en la pista y antes de despegar, se estrella
+C 0x8CB5 la barra en 0xE180
+C 0x8CB8 la velocidad / 2
+C 0x8CC0 a la fila 9, columna 25
+C 0x8CCC el combustible: menos de 16...
+C 0x8CD3 ...sin estrellarse...
+C 0x8CD9 ...la alarma
+L 0x8CDE barras_cuenta
+C 0x8CDE cada 32 cuadros
+C 0x8CE8 queda combustible?
+C 0x8CEE despegando: nada
+C 0x8CF3 en vuelo: nada
+C 0x8CF8 parado: se estrella
+L 0x8CFE combustible_gasta
+C 0x8CFE una unidad menos
+L 0x8D02 combustible_barra         La barra de FUEL: el combustible / 4 en 0x1999 (la fila 12, columna 25)
+C 0x8D02 / 4
+C 0x8D0D a la fila 12, columna 25
+L 0x8D1A altura_barra              La barra de ALTI (la altura, 0xE1A5) en 0x19F9 (la fila 15); a altura 0 con 0xE1AE 13 o mas, se estrella; y el horizonte segun la altura: a 0x17, 0x1A, 0x1D, 0x20 y 0x23 baja una fila (0xE1B7, desde la fila 10); por debajo de la fila 11, las filas 21-23 en blanco
+C 0x8D1A en el suelo?
+C 0x8D20 0xE1AE: 13?
+C 0x8D27 se estrella
+L 0x8D2B altura_barra_cero
+L 0x8D2E altura_barra_pon
+C 0x8D35 a la fila 15, columna 25
+C 0x8D41 el horizonte: la fila 9 + B
+C 0x8D49 aterrizando: la fila 10
+C 0x8D50 la altura: 0x17?
+C 0x8D57 la fila 11
+C 0x8D5C la 12
+C 0x8D61 la 13
+C 0x8D66 la 14
+C 0x8D6B otra altura: nada
+L 0x8D70 horizonte_pon
+C 0x8D70 ya puesto?
+C 0x8D75 la fila...
+L 0x8D7A horizonte_fila
+C 0x8D7D ...en 0xE1B7
+C 0x8D80 la 11 o mas?
+C 0x8D87 las filas 21, 22 y 23 en blanco
+L 0x8DAC horizonte_pinta
+C 0x8DAC el paisaje (0x929B)
+C 0x8DAF puesto
+L 0x8DB5 barra_pon                 Una barra de seis casillas en HL desde el valor A: una casilla llena (0x7C) por cada 8, una a medias (0x74 + el resto) y las demas vacias (0x74)
+C 0x8DB6 / 8: las llenas
+C 0x8DBF ninguna?
+L 0x8DC4 barra_llena
+C 0x8DC4 llena
+L 0x8DC9 barra_media
+C 0x8DC9 el resto
+C 0x8DCD 0x74 + el resto
+L 0x8DD3 barra_vacia
+C 0x8DD4 vacias
+L 0x8DD9 marcador_textos           El marcador de la derecha: HISCORE, SCORE, SPEED, FUEL, ALTI, el marco de las barras, las cifras, el avion = las vidas, P = la fase, el marco del radar y su punto (el sprite 28); en la demostracion, DEMO PLAY
+C 0x8DD9 HISCORE...
+C 0x8DDC ...en la fila 1, columna 25
+C 0x8DE5 SCORE: las cinco ultimas letras de HISCORE...
+C 0x8DE8 ...en la fila 3, columna 27
+C 0x8DF1 SPEED en la fila 8
+C 0x8DFD FUEL en la fila 11
+C 0x8E09 ALTI en la fila 14
+C 0x8E15 el marco de las barras, en las filas 9, 12 y 15
+C 0x8E39 los puntos y el record
+C 0x8E3C el avion (0xA1)...
+C 0x8E3F ...en la fila 6, columna 27...
+C 0x8E45 ...y "=" (0x0D)
+C 0x8E4A las vidas
+C 0x8E4D "P"...
+C 0x8E50 ...en la fila 5, columna 27...
+C 0x8E56 ...y "="
+C 0x8E5C la fase + 1...
+C 0x8E60 ...10 o mas?
+C 0x8E65 un 0 delante
+L 0x8E66 fase_cifras
+C 0x8E6B la cifra
+L 0x8E70 fase_diez
+C 0x8E70 - 10, y un 1 delante
+L 0x8E77 radar_marco               El marco del radar: dos columnas de 8 (0x8F0D en la 25 y 0x8F15 en la 30, desde la fila 16), su borde de arriba (0x8F1D) y el de abajo (0x8F21); el punto del avion es el sprite 28 (Y 0xA0, X 0xD8, dibujo 0x48, color 5)
+C 0x8E77 la fila 16, columna 25
+C 0x8E7D ocho filas
+L 0x8E7F radar_izq
+C 0x8E81 WRTVRM
+C 0x8E85 la fila siguiente
+C 0x8E8C la columna 30
+L 0x8E94 radar_der
+C 0x8EA1 el borde de arriba, fila 16
+C 0x8EAD el de abajo, fila 23
+C 0x8EB9 el punto del avion
+C 0x8EC9 la pista del radar
+C 0x8ECC jugando?
+C 0x8ED1 DEMO PLAY
+L 0x8ED5 radar_pista               La pista en el radar: las columnas 27 (0x7E) y 28 (0x7F) de las filas 18-22, y las 26 y 29 en blanco
+C 0x8ED5 la fila 18, columna 27
+C 0x8EDB la casilla 0x7E
+C 0x8EDD cinco filas
+C 0x8EE5 la columna 28: 0x7F
+C 0x8EF2 la 26 en blanco
+C 0x8EFF la 29 en blanco
+D 0x8F0D 0x8F3C marcador_datos      Las casillas del marco del radar (0x8F0D, 0x8F15, 0x8F1D, 0x8F21), SPEED, FUEL, ALTI (0x8F27) y el marco de las barras (0x8F34)
+L 0x8F3C paisaje                   El paisaje del horizonte (dos filas de 24 casillas desde DE): sin desplazar (0xE1BF a 0), el de la fase (0x8F94); si no, el de 0x8FB4 movido segun la X del avion / 8
+C 0x8F3C la fila 10
+C 0x8F3F desplazado?
+C 0x8F45 la fase x 2
+C 0x8F49 la tabla de 0x8FB4
+C 0x8F56 la X del avion...
+L 0x8F5B paisaje_x
+C 0x8F5B .../ 8
+L 0x8F62 paisaje_mueve
+C 0x8F62 + eso
+L 0x8F67 paisaje_dir
+L 0x8F6A paisaje_fijo
+C 0x8F6B la tabla de 0x8F94
+C 0x8F6E por la fase
+L 0x8F76 paisaje_fijo_dir
+L 0x8F7C paisaje_pinta
+C 0x8F7C la primera fila: 24 casillas
+C 0x8F7F LDIRVM
+C 0x8F82 la segunda fila...
+C 0x8F88 ...con lo que deja LDIRVM en HL y DE
+D 0x8F94 0x9094 paisajes            Los paisajes: 16 punteros por fase sin desplazar (0x8F94), 16 desplazados (0x8FB4) y las filas de casillas (0x8FD4)
+L 0x9094 pista_aleja               Despegado (0xE1B4 en marcha), cada 10 cuadros la pista se aleja: una fila mas de 0xE1B7 hacia abajo se llena con la casilla de 0x911C y debajo va el paisaje (0x8F3F); al llegar a la fila 22, el paisaje queda desplazado (0xE1BF = 1) y 0xE1C0 uno mas
+C 0x9094 el horizonte por debajo de la fila 11: nada
+C 0x909A en marcha?
+C 0x909F cada 10 cuadros
+C 0x90AD la fila del horizonte - 1...
+C 0x90B7 ...+ los pasos
+L 0x90BB pista_aleja_fila
+C 0x90BF la fila 22?
+C 0x90CA la casilla del paso (0x911C)
+C 0x90D6 24 casillas
+C 0x90DA FILVRM
+C 0x90DD la fila de abajo
+C 0x90E2 el paisaje
+C 0x90E5 un paso mas
+L 0x90ED pista_aleja_ultima
+C 0x90ED la fila 22: las dos ultimas
+L 0x910C pista_aleja_fin
+C 0x910C acabado
+C 0x9111 el paisaje desplazado
+C 0x9114 0xE1C0 uno mas
+D 0x911C 0x912A pista_aleja_casillas  Las casillas de cada paso de 0x9094
+L 0x912A pista_aleja_empieza       En el aire (0xE19F = 2), con velocidad y sin otro en marcha: despues de 0xE1BC cuadros, empieza (0xE1B4 = 1) y la espera siguiente es la fila del horizonte x 2
+C 0x9130 en el aire?
+C 0x9136 con velocidad?
+C 0x913B ya en marcha?
+C 0x9140 la espera
+L 0x914B pista_aleja_va
+C 0x914B en marcha
+C 0x9152 la fila x 2: la espera siguiente
+L 0x915A sprites_fase              48 bytes de 0x9166 a los atributos de los sprites 4-15 (0xE110)
+D 0x9166 0x9196 sprites_fase_datos  Los atributos de los sprites 4-15 al empezar la fase
+L 0x9196 suelo_avanza              Un paso del suelo: los dibujos de las casillas 0x40-0x4A del segundo y tercer tercio (0xA00, 0x1200) cambian segun la fase de las rayas (0xE1AA, 0-7, la tabla 0x9215); cada 20 pasos el punto del radar sube (el sprite 28, o el 27 aterrizando); y la distancia (0xE1AF) una mas: a 0x200, 0xE1AE = 1
+C 0x9196 el tercer tercio, desde la casilla 0x40
+C 0x919F el segundo
+C 0x91A8 la fase siguiente
+C 0x91B1 cada 20 pasos...
+C 0x91C0 aterrizando?
+C 0x91C6 ...el punto 27 sube
+L 0x91CB suelo_radar
+C 0x91CB ...o el 28
+L 0x91CE suelo_distancia
+C 0x91CE la distancia...
+C 0x91D1 ...una mas
+C 0x91D5 0x200?
+C 0x91D9 0xE1AE ya puesto?
+L 0x91E3 rayas_pon                 Las rayas de la fase A (0x9215) en los dibujos desde la VRAM HL: lineas llenas (0xFF) separadas por tantas vacias como dice la tabla, hasta 0x58 lineas
+C 0x91E3 x 2
+C 0x91F4 la cuenta de las lineas
+C 0x91F6 una llena
+L 0x91FC rayas_hueco
+C 0x91FC cuantas vacias
+L 0x91FE rayas_vacia
+C 0x9200 WRTVRM
+C 0x9207 una llena
+C 0x920C la siguiente
+C 0x920F 0x58 lineas?
+D 0x9215 0x929B rayas_datos         Las 8 fases de las rayas del suelo (8 punteros y los huecos de cada una)
+L 0x929B suelo_pinta               Desde la fila del horizonte (0xE1B7): dos filas en blanco (0x10) y debajo, hasta la fila 23, filas de 24 casillas 0x40, 0x41... (el suelo con rayas)
+C 0x92A1 en blanco
+C 0x92A6 FILVRM
+C 0x92B0 la casilla 0x40
+L 0x92B3 suelo_fila
+C 0x92B4 la fila siguiente
+C 0x92BB la casilla siguiente
+C 0x92BD hasta 0x1AE0 (la fila 23)
+L 0x92C9 suelo_color               El color del suelo de la fase (0xE1AB) en las casillas 0x40-0x4B del segundo y tercer tercio
+C 0x92C9 el tercer tercio
+C 0x92D5 el segundo
+L 0x92E2 pista_pinta               La pista en perspectiva: C filas de casillas 0x7E (la tabla 0x9313: cuantas y cuanto volver atras) desde la fila 23 hacia arriba, y la raya del centro (0x7F) en la columna 12, filas 12-23
+C 0x92E2 la fila 23, columna 6
+C 0x92E5 la tabla
+L 0x92E8 pista_fila
+C 0x92E8 cuantas
+L 0x92EA pista_casilla
+C 0x92EA la casilla 0x7E
+C 0x92F2 una fila menos
+C 0x92F6 cuanto volver: la fila de arriba, mas estrecha
+L 0x9302 pista_raya
+C 0x9302 la fila 12, columna 12
+C 0x9305 la casilla 0x7F
+C 0x9307 12 filas
+D 0x9313 0x932A pista_datos         La pista: el ancho de cada fila y cuanto volver para la de arriba
+L 0x848F shot_pon                  El recuadro SHOT del radar: las columnas 27 y 28 de las filas 18-22 en blanco, SHOT (0x84F2) en la fila 18, el avion y "=" (0x84F6) en la 20 y las dos cifras de los enemigos que quedan por derribar (0xE1CA); el punto del radar y los tiros fuera
+C 0x84AA SHOT en la fila 18
+C 0x84B6 el avion y "=" en la fila 20
+C 0x84C2 los que quedan
+D 0x84F2 0x84F8 shot_texto          "SHOT" y el avion y "=" del recuadro
+L 0x84F8 shot_cifras               Los enemigos que quedan (0xE1CA, BCD; empieza en 20) en la fila 20, columnas 28 y 29
+L 0x932A pista_despegue            Al despegar (0xE1AE 1-13, cada 4 cuadros): la pista se queda atras fila a fila (casillas 0x40 + paso, los sprites de 0x94BF); con el paso 13, el recuadro SHOT y la distancia a 0; si no ha despegado, se estrella; si no, el color del suelo de la fase. Con 14 o mas, la pista del aterrizaje se acerca (0x9406)
+C 0x932A en el aire: nada
+C 0x9330 en marcha?
+C 0x9335 cada 4 cuadros
+C 0x9343 13: nada
+C 0x9349 14 o mas: el aterrizaje
+C 0x934C la fila 11 + el paso
+C 0x9356 la tabla de 0x94A7: columna y ancho
+C 0x9369 la casilla 0x40 + el paso - 1
+L 0x936E pista_despegue_fila
+C 0x9374 los sprites de 0x94BF
+C 0x937E el 13?
+C 0x9381 el recuadro SHOT
+C 0x9384 la distancia a 0
+C 0x938A en la ultima parte?
+C 0x9391 despegado?
+L 0x9397 pista_despegue_choca
+C 0x9397 se estrella
+L 0x939D pista_despegue_color
+C 0x939D el color del suelo de la fase (0x8558)
+L 0x93B9 pista_sprites             Los 8 bytes del paso B de la tabla HL a los atributos de un par de sprites (los 4-5, 6-7... segun el paso) y el paso siguiente
+L 0x9406 pista_aterriza            El aterrizaje (0xE1AE 14-0x1A): la pista se acerca fila a fila (casillas 0x7E y la raya 0x7F), mas despacio en los pasos 15 y 16; con el 14, los sprites de 0x951F; con 0x1A, acabado: el paisaje fijo y el punto del radar
+D 0x94A7 0x958E pista_pasos         Los pasos de la pista: columna y ancho por fila (0x94A7), sprites del despegue (0x94BF) y del aterrizaje (0x951F, 0x9527); y HISCORE (0x9587: SCORE son sus cinco ultimas letras, 0x9589)
+L 0x7000 fase_dato1                0xE484 = el byte de la fase (0xE00A, 15 como mucho) en la tabla 0x7020
+C 0x7002 la tabla de 0x7020
+L 0x7005 fase_dato
+C 0x7005 la fase...
+C 0x7008 ...15 como mucho
+C 0x7011 + la tabla
+C 0x7013 a 0xE484
+L 0x7019 fase_dato2                Lo mismo con la tabla de 0x7030
+D 0x7020 0x7040 fase_datos          Dos tablas de 16 bytes por fase (0x7020, 0x7030) para 0xE484
+L 0x7040 enemigo_dispara           El enemigo (sus sprites IX) dispara, si toca (0xE488 a 0) y esta por encima del avion (0x30 o mas, y no en la fila de arriba del todo), salvo en la fase 0: alineado con el avion (a menos de 3), un tiro recto (dibujo 0xAC, la direccion 1); a menos de 0x40 de altura y a 0x18 o mas de lado, desde la fase 3, uno en diagonal (0xA4 o 0xA8, la direccion 2 o 3); despues una espera al azar (0x70F7)
+C 0x7040 la espera
+C 0x7046 una menos
+L 0x704B enemigo_dispara_mira
+C 0x704B la Y del avion - la suya
+C 0x7051 por debajo: nada
+C 0x7052 a menos de 0x30: nada
+C 0x7055 la fase 0: nada
+C 0x705A arriba del todo: nada
+C 0x7060 la X del avion...
+C 0x7063 ...igual?
+C 0x706B la diferencia
+L 0x706F enemigo_alineado
+C 0x706F a menos de 3?
+L 0x7073 enemigo_tiro_recto
+C 0x7075 un tiro libre?
+C 0x707B en el sitio del enemigo
+C 0x7087 dibujo 0xAC, color 5
+C 0x708F sus datos (DE)
+C 0x7092 la direccion 1: recto
+C 0x7098 la espera
+L 0x709C enemigo_dispara_no
+L 0x709F enemigo_tiro_lado
+C 0x709F a menos de 0x40 de altura?
+C 0x70A9 de lado: a la derecha?
+C 0x70B1 a la izquierda: la diferencia
+L 0x70BB enemigo_tiro_der
+C 0x70BB 0x18 o mas?
+C 0x70BE la direccion 2, dibujo 0xA4
+L 0x70C4 enemigo_tiro_izq
+C 0x70C7 la direccion 3, dibujo 0xA8
+L 0x70CB enemigo_tiro_diag
+C 0x70CB desde la fase 3
+C 0x70D3 un tiro libre?
+C 0x70E5 su dibujo
+C 0x70EF su direccion
+L 0x70F7 enemigo_espera            Una espera al azar (R): 16-47 cuadros hasta el tiro siguiente (0xE488)
+L 0x7101 tiro_libre                Un tiro enemigo libre: IY sus atributos (los sprites 4-7, 0xE110-0xE11C) y DE sus datos (0xE300, 0xE310, 0xE320, 0xE330); A = 0xFF si no hay
+C 0x7101 el primero
+C 0x7108 libre (Y 0)?
+C 0x710D el segundo
+C 0x7119 el tercero
+C 0x7125 el cuarto
+C 0x7131 ninguno
+C 0x7134 ya cayendo?
+C 0x713C el avion
+C 0x7140 se tocan?
+L 0x7149 enemigo_choca_si
+C 0x7149 el avion se estrella
+L 0x7150 enemigo_tocado            ¿Le da al enemigo IX alguno de los cuatro tiros del avion (0xE170-0xE17C)? El tiro se acaba (Y 6) y el enemigo cae: su estado a +0x10, +4 = 0xFF, +8 = 0
+C 0x7152 el primer tiro
+C 0x715C el segundo
+C 0x7166 el tercero
+C 0x7170 el cuarto
+C 0x717A ninguno: A = 0
+L 0x717E enemigo_tocado_si
+C 0x717E el tiro, fuera
+L 0x718E enemigo_cae_empieza
+C 0x7190 su estado, guardado
+C 0x7196 cayendo
+C 0x719E A = 0xFF
+L 0x71A1 toca_tiro                 Las cajas de un tiro: 0x14 a un lado y 0xC al otro
+L 0x71A7 toca_avion                Las del avion: 0x1A y 4
+L 0x71AB toca                      ¿Se tocan los sprites IX e IY? Los dos en pantalla (X e Y no 0), la X a menos de H (o L) y la Y a menos de 6: A = 0xFF
+C 0x71AB IX fuera?
+C 0x71B5 IY fuera?
+C 0x71BF las X...
+C 0x71C7 IY a la derecha
+C 0x71CD a menos de H?
+L 0x71D2 toca_izq
+C 0x71D2 a menos de L?
+L 0x71D5 toca_y
+C 0x71D5 las Y
+C 0x71E3 a menos de 6?
+C 0x71E7 se tocan
+L 0x71EA toca_no
+L 0x71EC enemigo_cae               El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explosion (0x727D, 0x72AF, 0x72B5), 4 cuadros cada uno; despues desaparece, da sus puntos (+0x1B; desde la fase 7, 16 mas por fase) y quedan uno menos por derribar (0xE484, 0xE1CA, BCD); a 0, en las fases 0 y 1, el final (0x77A0); en las demas, el del tipo 5 (0x77C8)
+C 0x71EC el paso
+C 0x71FD fuera
+C 0x7219 jugando?
+C 0x721F la fase - 6...
+C 0x7226 ...hasta la 6: sus puntos sin mas
+C 0x7228 x 16
+C 0x722C + sus puntos
+C 0x7230 100 o mas?
+C 0x7234 100 puntos...
+C 0x723A ...y el resto
+L 0x723D enemigo_cae_puntos
+C 0x723E a los puntos
+L 0x7243 enemigo_cae_puntos_fijos
+C 0x7243 sus puntos
+L 0x7249 enemigo_cae_cuenta
+C 0x7249 los que quedan...
+C 0x724F ...uno menos, en BCD
+C 0x7254 en el recuadro SHOT
+C 0x725A la fase 0?
+C 0x7260 la 1?
+C 0x7264 el tipo 5?
+L 0x726D enemigo_cae_fase0
+C 0x726D ninguno: el final
+L 0x7275 enemigo_cae_fase1
+L 0x727D explosion1                La explosion, paso 0: color 8, el sonido 2 de B y C, el estado guardado; sale despedido hacia el lado de la pantalla (+1 = -2, +2 = 3 o -3), dibujo 0xEC
+C 0x727D color 8
+C 0x7281 el sonido 2 de B y C
+C 0x7290 a la derecha de la mitad?
+C 0x7297 hacia arriba y a la derecha
+L 0x72A5 explosion1_izq
+C 0x72A5 hacia arriba y a la izquierda
+L 0x72AF explosion2
+C 0x72AF el dibujo 0xF0
+L 0x72B5 explosion3
+C 0x72B5 los tipos 6 o mas...
+C 0x72BC ...el dibujo 0xFC
+L 0x72C2 explosion3_otro
+C 0x72C2 ...los otros, 0xF4
+L 0x72C6 explosion_cuenta
+C 0x72C6 4 cuadros...
+C 0x72D0 ...y el paso siguiente
+L 0x72D8 enemigos                  Los enemigos de cada cuadro (guardando IX)
+L 0x72E0 enemigos_va               En el aire (0xE19F = 2), sin el cartel del despegue y fuera del repostaje (0xE19D = 1): la primera vez, la oleada de la fase (0x7CDF fase 0, 0x7CF4 fase 1 y demostracion, 0x7D0C, 0x7D27, 0x7D42 desde la 4) y los que hay que derribar (0xE484); despues, la oleada (0x7363) y los enemigos uno a uno (0x7C5A)
+C 0x72E0 en el aire?
+C 0x72E6 el cartel?
+C 0x72EB 0xE19D = 1?
+C 0x72F8 aterrizando?
+C 0x72FD 0xE19D = 0
+L 0x7301 enemigos_empieza
+C 0x7301 ya empezada?
+C 0x7307 los que hay que derribar
+C 0x730D en el recuadro SHOT
+C 0x7313 la oleada de la fase
+L 0x7327 oleada_fase0
+C 0x7327 la demostracion: la de la fase 1
+L 0x7333 oleada_fase1
+L 0x7338 oleada_fase2
+L 0x733D oleada_fase3
+L 0x7342 oleada_fase4
+L 0x7345 oleada_pon
+C 0x7345 su primera entrada
+C 0x7348 su cuenta (+2)
+C 0x734E empezada
+C 0x7353 los sprites 4-25 a cero
+L 0x7358 oleada_borra
+L 0x735D enemigos_cuadro
+C 0x735D la oleada
+C 0x7360 los enemigos
+L 0x7363 oleada                    La oleada (0xE481: entradas de tres bytes, tipo, espera y cuantos; 0xFF y una direccion, otra vez): con 0xE483 = 1 o 2, el final; sin enemigos por derribar, el final (0x77A0); cada tanto (la espera, 0xE486) sale uno del tipo (la tabla 0x742F) si hay sitio (0x77E2)
+C 0x7363 0xE483 = 1?
+C 0x736B = 2?
+C 0x7370 por fases
+L 0x7380 oleada_mira0
+L 0x7390 oleada_mira1
+L 0x73A0 oleada_mira2
+L 0x73B0 oleada_mira3
+L 0x73BE oleada_entrada
+C 0x73BE la entrada
+C 0x73C1 quedan de esta?
+C 0x73C7 la siguiente (+3)
+C 0x73CB 0xFF: a otra direccion
+L 0x73D4 oleada_entrada_pon
+C 0x73D7 su cuenta
+C 0x73DD la espera a 0
+L 0x73E1 oleada_sale
+C 0x73E4 quedan por derribar?
+C 0x73EA no: solo el tipo 5
+L 0x73F2 oleada_espera
+C 0x73F2 la espera...
+C 0x73FB ...contra la de la entrada
+C 0x7403 un sitio libre (IY)?
+C 0x740C uno menos de esta entrada
+C 0x7413 el tipo...
+C 0x7414 ...0x11 o mas: los 4 bits bajos
+C 0x741A sus cuentas a 0
+C 0x7422 x 2
+C 0x7426 la tabla de 0x742F
+C 0x742E salta
+D 0x742F 0x7451 enemigo_tipos       Las 17 rutinas que ponen un enemigo nuevo segun su tipo
+L 0x7451 oleada_salta              La entrada siguiente de la oleada sin poner enemigo (0xFF y una direccion: otra vez desde alli)
+C 0x7453 la entrada
+C 0x7456 la siguiente (+3)
+C 0x745A 0xFF?
+C 0x745E la direccion
+L 0x7463 oleada_salta_pon
+L 0x7469 tipo_0                    El tipo 0: nada
+L 0x746A tipo_2                    El tipo 2: entra a 0x50 del avion, por el lado contrario a la mitad en que esta; dibujo 0x68, color 14, el movimiento 2, 30 puntos
+C 0x746A la X del avion
+C 0x746D en la mitad izquierda?
+L 0x7473 tipo_2_der
+C 0x7473 a su derecha (+0x50)
+C 0x7475 sus direcciones (+5, +6)
+C 0x747D el lado (+0x18)
+L 0x7483 tipo_2_izq
+C 0x7483 a su izquierda (-0x50)
+L 0x7491 tipo_2_pon
+C 0x7491 en su sitio, arriba
+C 0x7494 el dibujo
+C 0x749C color 14
+C 0x74A0 +0x14, +0x15
+C 0x74A8 el movimiento 2
+C 0x74B0 30 puntos
+L 0x74B5 tipo_3                    El tipo 3: a 0x28 / 0x38 del avion; dibujo 0x74, color 10, el movimiento 3, 40 puntos
+L 0x74BE tipo_3_der
+L 0x74CE tipo_3_izq
+L 0x74DC tipo_3_pon
+C 0x74DF el dibujo
+C 0x74E7 color 10
+C 0x74F3 el movimiento 3
+C 0x74F7 40 puntos
+L 0x74FC tipo_4                    El tipo 4: a 0x40 del avion; dibujo 0x80, color 7, el movimiento 4, 50 puntos
+L 0x7509 tipo_4_der
+L 0x7519 tipo_4_izq
+L 0x7527 tipo_4_pon
+C 0x752A el dibujo
+C 0x7532 color 7
+C 0x753E 50 puntos
+L 0x7543 tipo_5                    El tipo 5, el grande: solo desde la fase 2, con todos los demas derribados (0xE484 a 0) y sin final en marcha; si no, la entrada se salta
+C 0x7543 la fase 0 o 1: no
+C 0x754D quedan por derribar: no
+C 0x7555 el final en marcha: no
+L 0x755D tipo_5_salta
+C 0x755D la entrada siguiente
+L 0x756D tipo_5_pon                El grande: el movimiento 5, X 0xB0, dibujo 0x98, color 15, 90 puntos; en las fases impares, otro paso (+1 = 4) y X 0x20; y los que hay que derribar de la segunda tabla
+C 0x756D el movimiento 5
+C 0x7571 X 0xB0
+C 0x7576 el dibujo
+C 0x757E color 15
+C 0x758A 90 puntos
+C 0x7592 la fase impar?
+L 0x759B tipo_5_impar
+C 0x759F X 0x20
+L 0x75A3 tipo_5_cuenta
+C 0x75A3 los que hay que derribar
+C 0x75A6 99: 100? (sigue en BCD)
+L 0x75AB tipo_5_cifras
+L 0x75AE tipo_6                    El tipo 6: como el 3, sin lado y 60 puntos
+L 0x75BA tipo_7                    El tipo 7: a 0x50, dibujo 0x8C, color 7, el movimiento 4, 20 puntos
+L 0x75C7 tipo_7_der
+L 0x75D7 tipo_7_izq
+L 0x75E5 tipo_7_pon
+L 0x7601 tipo_8                    El tipo 8: a 0x40, dibujo 0x68, color 14, 20 puntos
+L 0x760E tipo_8_der
+L 0x761E tipo_8_izq
+L 0x762C tipo_8_pon
+L 0x7648 tipo_9                    El tipo 9: a 0x28, dibujo 0x5C, color 13, 20 puntos
+L 0x7655 tipo_9_der
+L 0x7665 tipo_9_izq
+L 0x7673 tipo_9_pon
+L 0x768F tipo_10                   El tipo 10: a 0x50, dibujo 0x8C, color 10, 30 puntos
+L 0x769C tipo_10_der
+L 0x76AC tipo_10_izq
+L 0x76BA tipo_10_pon
+L 0x76D6 tipo_11                   El tipo 11: a 0x40, dibujo 0x68, color 7, 30 puntos
+L 0x76E3 tipo_11_der
+L 0x76F3 tipo_11_izq
+L 0x7701 tipo_11_pon
+L 0x771D tipo_12                   El tipo 12: en una X al azar (R, 0x28-0xB7), el movimiento 6, dibujo 0x50 / 0x68, color 10, 40 puntos
+C 0x771D al azar
+C 0x771F por la izquierda, no
+C 0x7722 por la derecha, no
+L 0x7751 tipo_1                    El tipo 1 (y 13-16): a 0x30 del avion, el movimiento 1, dibujo 0x8C, color 13
+L 0x775A tipo_1_der
+L 0x7766 tipo_1_izq
+L 0x7770 tipo_1_pon
+L 0x778C enemigo_pon               El enemigo nuevo en la X A, arriba del todo (Y 1), sus cuentas a 0 y 30 puntos
+C 0x778C la X
+C 0x778F la Y: 1
+C 0x779B 30 puntos (los tipos los cambian)
+L 0x77A0 combate_acaba             El final del combate (0xE483 = 2): cuando ya no queda nadie en pantalla (0x7833), la ultima parte (0xE19D = 2: el aterrizaje, 0xE1C9 = 1), la oleada otra vez para la vuelta y los sprites 16-31 a cero
+C 0x77A5 queda alguien?
+C 0x77AA la ultima parte
+C 0x77AF el aterrizaje
+C 0x77B3 la oleada otra vez
+C 0x77BA los que hay que derribar
+C 0x77BD los sprites 16-31
+L 0x77C2 combate_acaba_borra
+L 0x77C8 repostaje_pide            El grande derribado (0xE483 = 1): cuando no queda nadie en pantalla, el repostaje (0xE19D = 1) y los que hay que derribar de la segunda tabla
+C 0x77CD queda alguien?
+C 0x77D7 el repostaje
+C 0x77DA 0xE483 = 0xFF
+L 0x77E2 enemigo_libre             Un sitio libre para un enemigo: IX sus sprites (0xE128, 0xE130, 0xE138; 0xE140 desde la fase 1) e IY sus datos (0xE360, 0xE380, 0xE3A0, 0xE3C0); A = 0xFF si no hay
+C 0x77E2 el primero
+C 0x77EA libre?
+C 0x77EF el segundo
+C 0x77FC el tercero
+C 0x7809 la fase 0: solo tres
+C 0x780F el cuarto
+L 0x781C enemigo_libre_no
+D 0x781F 0x7833 copia8_suelta       Codigo que nada llama (ningun salto ni puntero; sin ejecutar en la cobertura): copia 8 bytes de HL a IX y el siguiente a +4 de IY, como si pusiera un enemigo desde una tabla
+L 0x7833 pantalla_vacia            ¿Queda algun sprite en pantalla de los 18 desde el 4 (0xE110)? NZ si queda
+C 0x7833 las X de los sprites 4-21
+C 0x7838 una X
+C 0x7839 en pantalla?
+C 0x783B el siguiente
+C 0x7845 ninguno
+C 0x7847 derribado?
+C 0x784C x 2
+C 0x7850 la tabla
+L 0x7842 tiro_enemigo_mueve        El tiro enemigo IX (sus datos IY, 0xE300...) segun su direccion (+4): 0 nada, 0xFF acabado (0x71EC); si no, la tabla de 0x7859
+C 0x7842 la direccion
+D 0x7859 0x786C tiro_direcciones    Las direcciones de los tiros enemigos (la 0 sin usar): 1 recto, 2 abajo a la derecha, 3 abajo a la izquierda, 4-8 quieto; y un "ret"
+L 0x7134 enemigo_choca             ¿Toca el sprite IX (un enemigo o un tiro suyo; sus datos IY) al avion (0xE100)? Entonces el avion se estrella y el otro se acaba
+L 0x786C tiro_recto                Dos filas abajo
+L 0x7878 tiro_der                  Dos filas abajo y una columna a la derecha
+L 0x7887 tiro_izq                  Dos filas abajo y una a la izquierda
+L 0x7896 fuera_mira                ¿Se ha ido el sprite IX por abajo (Y 0xE0 o mas) o por la derecha (X 0xB0 o mas)? Entonces fuera, y sus datos a 0
+C 0x7896 por abajo?
+C 0x789D por la derecha?
+L 0x78A5 fuera_quita
+C 0x78A5 fuera
+C 0x78B5 libre
+L 0x78BA enemigo_mueve             El enemigo IX (sus datos IY) segun su movimiento (+4): 0 nada, 0xFF derribado (0x71EC), si no la tabla de 0x78D1 (1-6)
+C 0x78BA el movimiento
+C 0x78BF derribado?
+C 0x78C4 x 2
+C 0x78C8 la tabla
+L 0x78EF mov_4                     El movimiento 4: dispara si va hacia abajo (direcciones 0-2 y 11-15); arriba del todo espera hasta la Y 0x40; despues, cada +0x15 cuadros la direccion (+5) gira un paso (+0x18) hasta la de +6; al llegar, recto
+C 0x78EF su direccion
+C 0x78FC dispara
+L 0x78FF mov_4_paso
+C 0x78FF el paso 2: recto
+C 0x7907 el paso 0: bajando...
+C 0x790A ...hasta la Y 0x40
+C 0x7912 el paso 1
+L 0x7916 mov_4_gira
+C 0x7916 la cuenta...
+C 0x791C ...contra +0x15
+C 0x7926 la direccion + el lado
+C 0x7931 la final?
+C 0x7937 el paso 2
+L 0x793E mov_5                     El movimiento 5, el grande: su color cambia cada cuadro (1-15) y sus pasos (+1, la tabla 0x795C) le hacen cruzar la pantalla de lado a lado, bajar y volver
+C 0x793E el color...
+C 0x7942 ...sin el 0
+C 0x794A el paso
+C 0x7953 la tabla
+D 0x795C 0x796C grande_pasos        Los 8 pasos del grande (0x793E)
+L 0x796C grande_paso0              El paso 0: a la izquierda (la direccion 3, el dibujo 0x94) hasta la X 0x20 (0x60 en las fases 8-11); al llegar, la vuelta siguiente (+0x1D) y el paso siguiente
+C 0x796C las cifras de SHOT
+C 0x796F la direccion 3
+C 0x7973 el dibujo 0x94
+C 0x7977 las fases 8-11?
+C 0x7982 hasta 0x60
+L 0x7989 grande_paso0_x
+C 0x7989 hasta 0x20
+L 0x798E grande_paso0_mira
+C 0x7991 vueltas que quedan?
+C 0x7998 una vuelta mas
+C 0x799B el paso siguiente
+L 0x79A5 grande_vueltas            ¿Le quedan vueltas al grande? Una en las fases 0-3 y dos desde la 4 (+0x1D): A = 0xFF si quedan
+C 0x79A5 la fase 4 o mas?
+L 0x79AE grande_vueltas1
+L 0x79B7 grande_vueltas2
+L 0x79BE grande_vueltas_si
+L 0x79C1 grande_vueltas_no
+L 0x79C3 grande_paso1              El paso 1: la direccion 1 durante 8 cuadros
+L 0x79C9 grande_paso2              El paso 2: la direccion 0 y el dibujo 0x98, 8 cuadros
+L 0x79D3 grande_paso3              El paso 3: la direccion 15, 8 cuadros
+L 0x79D9 grande_paso4              El paso 4: la direccion 13 y el dibujo 0x9C hasta la X 0xA8 (0x70 en las fases 8 o mas)
+L 0x79EA grande_paso4_x
+L 0x79F3 grande_paso4_x8
+L 0x79FA grande_paso4_mira
+L 0x7A09 grande_paso5              El paso 5: la direccion 15, 8 cuadros
+L 0x7A0F grande_paso6              El paso 6: la direccion 0 y el dibujo 0xA0, 8 cuadros
+L 0x7A19 grande_paso_cuenta        8 cuadros (+0xE) y el paso siguiente
+L 0x7A2C grande_paso7              El paso 7: la direccion 3 y otra vez el paso 0
+L 0x7A34 grande_mueve
+C 0x7A34 un paso en su direccion
+C 0x7A37 le dan?
+C 0x7A3A se ha ido?
+L 0x7A3D mov_6                     El movimiento 6: baja; si pasa cerca por encima del avion (a menos de 0x20), se tuerce hacia el (la direccion 10 o 6)
+C 0x7A3D la Y del avion - la suya
+C 0x7A45 a menos de 0x20?
+C 0x7A4B la X: hacia que lado?
+L 0x7A55 mov_6_izq
+L 0x7A5B mov_6_der
+L 0x7A5F mov_6_paso
+C 0x7A5F un paso
+C 0x7A62 le dan?
+C 0x7A69 toca al avion?
+L 0x7A6F mov_1                     El movimiento 1: dispara; bajando hasta la Y 0x50, recto; despues cada +0x15 cuadros la direccion gira un paso hasta la de +6
+C 0x7A6F dispara
+C 0x7A72 el paso 1: recto
+C 0x7A79 hasta la Y 0x50
+C 0x7A80 la cuenta...
+C 0x7A86 ...contra +0x15
+C 0x7A8F la direccion, un paso
+C 0x7A98 la final?
+C 0x7A9D el paso siguiente
+L 0x7AA0 mov_paso                  Un paso en su direccion (0x7B79), le dan?, toca al avion?, y si se ha ido
+C 0x7AA0 un paso
+C 0x7AA3 le dan?
+C 0x7AAA toca al avion?
+L 0x7AB0 mov_2                     El movimiento 2: dispara; va hacia el centro hasta la X 0x40 (0x78 por la derecha); despues gira (+0x18) hasta la direccion de +6 y repite hasta cuatro veces (+0x19)
+C 0x7AB0 dispara
+C 0x7AB3 el paso 1?
+C 0x7ABA el paso 2?
+C 0x7ABE hacia que lado va?
+L 0x7AC7 mov_2_izq
+C 0x7AC7 hasta 0x40
+L 0x7AD0 mov_2_der
+C 0x7AD0 hasta 0x78
+L 0x7AD9 mov_2_gira
+C 0x7AD9 el paso 1
+L 0x7ADF mov_2_paso1
+C 0x7ADF la cuenta
+C 0x7AEE la direccion + el lado
+C 0x7AF9 la final?
+L 0x7B04 mov_2_paso2
+C 0x7B04 las vueltas...
+C 0x7B08 ...cuatro como mucho
+C 0x7B0F otra vez el paso 0
+L 0x7B13 mov_2_mueve
+L 0x7B22 mov_3                     El movimiento 3: dispara; baja hasta la Y de +0x14 y despues gira cada +0x15 cuadros hasta la direccion de +6
+C 0x7B22 dispara
+C 0x7B25 el paso 2: recto
+C 0x7B2C el paso 0
+C 0x7B2F hasta la Y de +0x14
+C 0x7B37 el paso 1
+L 0x7B3D mov_3_gira
+C 0x7B3D la cuenta
+C 0x7B4C la direccion + el lado
+L 0x7B57 mov_final                 Si la direccion es ya la de +6 (y +0x16 a 0), el paso 2
+C 0x7B57 +0x16?
+C 0x7B5D la final?
+C 0x7B65 el paso 2
+L 0x7B69 mov_3_mueve
+L 0x7B79 paso                      Un paso del sprite IX en su direccion (+5, 0-15; la tabla 0x7C3A de parejas Y, X): su dibujo (+0) segun hacia donde mira (+4 o -4 de lado), la Y y la X: 2 y -2 mueven uno cada cuadro, 1 y -1 uno cada 2 cuadros; los rapidos (+9 = 2), cada 4 cuadros un paso mas
+C 0x7B79 la direccion: 0, 1, 15, 7, 8 o 9...
+C 0x7B90 ...de frente; 10-14 a un lado, 2-6 al otro
+L 0x7B98 paso_dibujo_der
+C 0x7B98 el dibujo + 4
+L 0x7BA2 paso_dibujo_izq
+C 0x7BA2 el dibujo - 4
+L 0x7BAC paso_dibujo_frente
+L 0x7BB2 paso_y
+C 0x7BB2 la direccion x 2
+C 0x7BB9 la tabla
+C 0x7BBD la Y: 2?
+C 0x7BC2 -2?
+C 0x7BC6 si no, cada 2 cuadros
+L 0x7BD6 paso_y_mas
+C 0x7BD6 2: 1 cada cuadro
+L 0x7BD9 paso_y_menos
+C 0x7BD9 -2: -1 cada cuadro
+L 0x7BDA paso_y_pon
+C 0x7BDA la Y + eso
+L 0x7BE1 paso_x
+C 0x7BE2 la X
+L 0x7BFB paso_x_mas
+L 0x7BFE paso_x_menos
+L 0x7BFF paso_x_pon
+C 0x7BFF la X + eso
+L 0x7C06 paso_rapido
+C 0x7C06 rapido (+9 = 2)?
+C 0x7C0E cada 4 cuadros...
+C 0x7C1D ...otro paso de lado...
+C 0x7C25 ...y de alto
+D 0x7C2F 0x7C5A paso_datos          11 bytes de codigo que nada llama ("ld a,(iy+6) / ld (iy+5),a / ld (iy+9),2 / ret": la direccion final y rapido) y las 16 direcciones (0x7C3A: Y, X)
+L 0x7C5A enemigos_todos            Los seis tiros enemigos (sprites 4-9, 0xE110; datos 0xE300, 16 bytes) y los seis enemigos (dos sprites cada uno desde el 10, 0xE128; datos 0xE360, 32 bytes)
+C 0x7C5A el primer tiro
+C 0x7C9C el primer enemigo
+D 0x7CDF 0x7D6A oleadas              Las oleadas de cada fase (0x7CDF, 0x7CF4, 0x7D0C, 0x7D27, 0x7D42): entradas de tres bytes (tipo, espera, cuantos) y 0xFF con la direccion por donde seguir (las cinco vuelven a su principio)
+D 0x7D6A 0x8000 relleno_7d6a         Bytes sin orden (restos en la EPROM): ningun puntero ni tabla llega aqui; su lectura esta por medir
+D 0x4000 0x6000 vacio                0x4000-0x5FFF: 8 KB de 0xFF; el cartucho son 24 KB (0x6000-0xBFFF)
+D 0x6000 0x7000 titulo_casillas      Las casillas del titulo: dibujos (0x6000) y colores (0x6800), 0x600 bytes de cada (las casillas 0x40-0xFF de los tres tercios, 0x80B0); los 0x200 que siguen a cada uno (0x6600, 0x6E00) no los copia nadie
+D 0x78D1 0x78EF enemigo_movimientos  Los movimientos de los enemigos (0x78BA, la entrada 0 sin usar): 1 0x7A6F, 2 0x7AB0, 3 0x7B22, 4 0x78EF, 5 0x793E (el grande), 6 0x7A3D, y 0x7A6F otra vez para los demas
+D 0x8000 0x8010 cabecera             La cabecera del cartucho: "AB" e INIT 0x8010; lo demas, a cero
+D 0x98B0 0x996D textos               Los textos (casilla = letra - 0x30; 0x10 el espacio): TAKE OFF:BONUS 1000PTS. (0x98B0), PUSH TRIGGER OR SPACE (0x98C7), COPYRIGHT 1985 (c) CASIO (0x98DC), "TIME :OVER" (0x98F2, sin usar), GAME OVER (0x98FC); las casillas de las dos aguilas del titulo (0x9905, 0x990E, tres filas de 3), el logotipo EAGLE FIGHTER (0x9917, seis filas de 10) y CASIO (0x9953)
+D 0x9AD1 0xA000 relleno_9ad1         Bytes sin orden (restos en la EPROM) hasta el motor de sonido: ningun puntero ni tabla llega aqui; su lectura esta por medir
+D 0xA65F 0xA800 relleno_a65f         Bytes sin orden despues de las piezas del sonido; ningun puntero llega aqui; su lectura esta por medir
+D 0xA800 0xB000 fase_dibujos         Los dibujos de las casillas de la fase: 0x600 bytes (las 0xC0 casillas desde la 0x40, 0x958E); despues 0x200 a cero (0xAE00, los que copiaria el codigo suelto de 0x9886)
+D 0xB000 0xB800 fase_colores         Los colores de esas casillas (0x600 bytes) y 0x200 que nadie copia
+D 0xB800 0xC000 sprites_datos        Los dibujos de los sprites (0x800 bytes a 0x3800, 0x987A): el avion, los enemigos, sus tiros, las explosiones
+C 0x7C62 se mueve
+C 0x7C65 el segundo tiro
+C 0x7C6D se mueve
+C 0x7C70 el tercero
+C 0x7C78 se mueve
+C 0x7C7B el cuarto
+C 0x7C83 se mueve
+C 0x7C86 el quinto
+C 0x7C8E se mueve
+C 0x7C91 el sexto
+C 0x7C99 se mueve
+C 0x7CA4 se mueve
+C 0x7CA7 el segundo enemigo
+C 0x7CAF se mueve
+C 0x7CB2 el tercero
+C 0x7CBA se mueve
+C 0x7CBD el cuarto
+C 0x7CC5 se mueve
+C 0x7CC8 el quinto
+C 0x7CD0 se mueve
+C 0x7CD3 el sexto
+C 0x7CDB se mueve
+C 0x9406 el paso 15?
+C 0x940D mas despacio: cada 12 veces
+C 0x9419 el 16?
+C 0x941D cada 16 veces
+C 0x942B el paso - 13...
+C 0x9430 ...filas desde la 11
+L 0x9437 pista_aterriza_fila
+C 0x943B la tabla: columna y ancho
+C 0x9445 la columna
+C 0x9448 el ancho
+C 0x944D + la columna
+C 0x944E la casilla 0x7E
+C 0x9453 FILVRM
+C 0x9457 la columna 12
+C 0x945B la raya (0x7F)
+C 0x945D WRTVRM
+C 0x9460 el paso 14?
+C 0x9467 los sprites 2 y 3 de 0x951F
+C 0x9472 a la VRAM
+C 0x9475 los sprites del paso (0x9527)
+C 0x9481 el paso 0x1A?
+C 0x9484 los sprites 2 y 3 a cero
+L 0x9489 pista_aterriza_borra
+C 0x948E a la VRAM
+C 0x9491 el paisaje fijo
+C 0x9498 acabado
+C 0x949C el punto del radar: color 5
+C 0x94A0 la distancia a 0
+C 0x93B9 (paso - 1) x 8
+C 0x93C5 el paso: 1-2...
+L 0x93C4 pista_sprites_pon
+C 0x93DA 11 o mas: los sprites 14 y 15 (0xE138)
+L 0x93DF pista_sprites12
+C 0x93DF 9-10: los 12 y 13
+L 0x93E4 pista_sprites10
+C 0x93E4 7-8: los 10 y 11
+L 0x93E9 pista_sprites8
+C 0x93E9 5-6: los 8 y 9
+L 0x93EE pista_sprites6
+C 0x93EE 3-4: los 6 y 7
+L 0x93F3 pista_sprites4
+C 0x93F3 1-2: los 4 y 5 (0xE110)
+L 0x93F6 pista_sprites_copia
+C 0x93F6 8 bytes: dos sprites
+C 0x93FB a la VRAM
+C 0x93FE el paso siguiente
+L 0x935F pista_despegue_dir
+C 0x9360 la columna
+C 0x9363 el ancho
+C 0x9368 + la columna
+C 0x936E WRTVRM
+C 0x9372 el ancho
+C 0x937B los sprites del paso
+L 0x93A7 pista_despegue_color_pon
+C 0x93A8 el color
+C 0x93AC al suelo
+C 0x93AF la pista que se aleja, en marcha?
+C 0x93B4 que empiece
+C 0x8776 1
+C 0x877A 2
+C 0x877E 3
+C 0x8782 4
+C 0x8786 5
+C 0x878A 6
+C 0x878E 7
+C 0x8792 8
+C 0x8404 los dos sprites
+C 0x8407 cada 2 pasos...
+C 0x8416 ...la altura...
+C 0x841C ...una menos
+C 0x8420 la barra de ALTI
+C 0x8972 ocupado: el tercero
+C 0x8975 ocupado
+C 0x8979 su X
+C 0x8981 su Y
+C 0x8989 dibujo 0xF8, color 15
+C 0x8996 ocupado: el cuarto
+C 0x8999 ocupado
+C 0x899D su Y
+C 0x89A5 su X
+C 0x89AD dibujo 0xF8, color 15
+C 0x89BA ocupado: ninguno
+C 0x89BD ocupado
+C 0x89C1 su Y
+C 0x89C9 su X
+C 0x89D1 dibujo 0xF8, color 15
+C 0x84F8 la cifra alta...
+C 0x8501 ...en la fila 20, columna 28
+C 0x8504 WRTVRM
+C 0x8507 la baja
+C 0x850C en la columna 29
+C 0x7BE3 2?
+C 0x7BE7 -2?
+C 0x7BEB si no, cada 2 cuadros
+C 0x7BFB 2: 1 cada cuadro
+C 0x844C cada 4 pasos...
+C 0x8458 ...la altura...
+C 0x845B ...una mas
+C 0x8466 ladeado?
+C 0x8887 hasta 0xAC
+C 0x888A dos pasos los dos sprites
+C 0x8896 el sonido 3 de B y C
+C 0x889F hasta 0x16
+C 0x88A2 dos pasos
+C 0x88AE el sonido 4 de B y C
+C 0x88B7 cada 4 cuadros...
+C 0x88BD ...dos de color 15
+C 0x88C6 los otros dos, 6
+C 0x90F9 24 casillas
+C 0x90FC la casilla
+C 0x90FD FILVRM
+C 0x9100 la fila de abajo
+C 0x9105 la siguiente casilla
+C 0x9109 FILVRM
+C 0x75E8 el dibujo
+C 0x75F0 color 7
+C 0x75FC 20 puntos
+C 0x762F el dibujo
+C 0x7637 color 14
+C 0x7643 20 puntos
+C 0x7676 el dibujo
+C 0x767E color 13
+C 0x768A 20 puntos
+C 0x76BD el dibujo
+C 0x76C5 color 10
+C 0x76D1 30 puntos
+C 0x7704 el dibujo
+C 0x770C color 7
+C 0x7718 30 puntos
+C 0x7770 el movimiento 1
+C 0x7777 el dibujo
+C 0x777F color 13
+C 0x7768 a su izquierda
+C 0x975B el sonido...
+C 0x9764 ...a cero
+C 0x976F las dos ultimas cifras...
+C 0x9772 ...las centenas...
+C 0x9775 ...y las decenas de millar
+C 0x7380 el final en marcha?
+C 0x7387 quedan por derribar?
+C 0x738B ninguno: el final
+C 0x7390 el final en marcha?
+C 0x7397 quedan por derribar?
+C 0x739B ninguno: el final
+C 0x73A0 el final en marcha?
+C 0x73A7 quedan por derribar?
+C 0x73AB ninguno: el final
+C 0x73B0 el final en marcha?
+C 0x73B7 quedan por derribar?
+C 0x73BB ninguno: el final
+C 0x7A19 la cuenta
+C 0x7A1F 8?
+C 0x7A27 el paso siguiente
+C 0x7A2C la direccion 3
+C 0x7A30 el paso 0
+C 0x79D9 la direccion 13
+C 0x79DD el dibujo 0x9C
+C 0x79E1 las fases 8 o mas?
+C 0x79EA hasta 0xA8
+C 0x79F3 hasta 0x70
+C 0x79FA vueltas que quedan?
+C 0x7A01 una vuelta mas
+C 0x7A04 el paso siguiente
+C 0x7A09 la direccion 15
+C 0x7A0F la direccion 0
+C 0x7A13 el dibujo 0xA0
+C 0x7B69 un paso
+C 0x7B6C le dan?
+C 0x7B73 toca al avion?
+C 0x8F77 la direccion
+C 0x8F7B DE: la VRAM
+C 0x700C 15
+C 0x7012 el byte
+C 0x701B la tabla de 0x7030
+C 0x7043 a 0?
+C 0x7047 apuntada
+C 0x7058 la fase 0?
+C 0x705D por encima de 0x10?
+C 0x7066 justo debajo
+C 0x7068 a la derecha
+C 0x7079 ninguno libre
+C 0x707E su Y
+C 0x7081 su X
+C 0x708B color 5
+C 0x70A6 a menos de 0x40?
+C 0x70AC la X del avion - la suya
+C 0x70AF el avion a la derecha
+C 0x70B4 la diferencia
+C 0x70C0 dibujo 0xA4
+C 0x70C4 0x18 o mas?
+C 0x70C9 dibujo 0xA8
+C 0x70CE la fase 3 o mas?
+C 0x70D7 ninguno libre
+C 0x70D9 su Y
+C 0x70DF su X
+C 0x70E8 color 5
+C 0x70F4 la espera
+C 0x70F7 al azar...
+C 0x70F9 ...0-31...
+C 0x70FB ...+ 16
+C 0x70FD la espera
+C 0x7105 sus datos
+C 0x710B libre: ese
+C 0x7111 sus datos
+C 0x7114 libre?
+C 0x711D sus datos
+C 0x7120 libre?
+C 0x7129 sus datos
+C 0x712C libre?
+C 0x7137 ya derribado?
+C 0x7143 se tocan?
+C 0x714B A = 0xFF: estrellado
+C 0x7156 le da el primero?
+C 0x7160 el segundo?
+C 0x716A el tercero?
+C 0x7174 el cuarto?
+C 0x7182 el tiro a cero
+C 0x7193 en +0x10
+C 0x719A la explosion, paso 0
+C 0x71A1 0x14...
+C 0x71A3 ...y 0xC
+C 0x71A7 0x1A...
+C 0x71A9 ...y 4
+C 0x71B0 su X
+C 0x71BA su X
+C 0x71C2 IX a la derecha?
+C 0x71CA la diferencia
+C 0x71D8 la diferencia de Y
+C 0x71DD la otra
+C 0x71EA no se tocan
+C 0x71F3 el paso 1?
+C 0x71F8 el paso 2?
+C 0x7201 la X, el dibujo...
+C 0x7209 ...sus datos libres
+C 0x7215 +0x16 a 0
+C 0x721C la demostracion: sin puntos
+C 0x7222 hasta la fase 6...
+C 0x7229 (x 16)
+C 0x722F guardados
+C 0x7236 las centenas
+C 0x7246 a los puntos
+C 0x724D ninguno: 0
+C 0x7250 en BCD
+C 0x7257 sus cifras
+C 0x725D la fase 0
+C 0x7267 el grande?
+C 0x7269 el repostaje
+C 0x7270 ninguno?
+C 0x7275 los que quedan
+C 0x7286 el estado
+C 0x7289 ya derribado?
+C 0x728D guardado
+C 0x7293 la mitad derecha?
+C 0x729B +2 = 3
+C 0x729F el dibujo 0xEC
+C 0x72A9 +2 = -3
+C 0x72B3 el dibujo 0xF0
+C 0x72B8 el tipo 6 o mas?
+C 0x72C9 la cuenta
+C 0x72CC 4?
+C 0x72D4 el paso siguiente
+C 0x72DA los enemigos
+C 0x72E3 en el aire?
+C 0x72E9 el cartel?
+C 0x72EE el repostaje?
+C 0x72F1 la ultima parte?
+C 0x72FB aterrizando?
+C 0x72FE la ultima parte acabada
+C 0x7479 gira hasta la direccion 0x5
+C 0x7485 sale con la direccion 0xD
+C 0x7489 gira hasta la direccion 0xB
+C 0x748D girando hacia delante (+1)
+C 0x7498 el dibujo de sus sprites: 0x68
+C 0x74A4 gira cada 0xA cuadros
+C 0x74AC sin vueltas
+C 0x74B5 la X del avion
+C 0x74B8 en la mitad izquierda?
+C 0x74BE a su derecha: + 0x28
+C 0x74C0 sale con la direccion 0x1
+C 0x74C4 gira hasta la direccion 0x2
+C 0x74C8 girando hacia atras (-1)
+C 0x74CE a su izquierda: - 0x38
+C 0x74D0 sale con la direccion 0xF
+C 0x74D4 gira hasta la direccion 0xE
+C 0x74D8 girando hacia delante (+1)
+C 0x74DC en su X, arriba
+C 0x74E3 el dibujo de sus sprites: 0x74
+C 0x74EB baja recto hasta la Y 0x60
+C 0x74EF gira cada 0x8 cuadros
+C 0x74FC el movimiento 4
+C 0x7500 la X del avion
+C 0x7503 en la mitad izquierda?
+C 0x7509 a su derecha: + 0x40
+C 0x750B sale con la direccion 0x3
+C 0x750F gira hasta la direccion 0x1
+C 0x7513 girando hacia atras (-1)
+C 0x7519 a su izquierda: - 0x40
+C 0x751B sale con la direccion 0xD
+C 0x751F gira hasta la direccion 0xF
+C 0x7523 girando hacia delante (+1)
+C 0x7527 en su X, arriba
+C 0x752E el dibujo de sus sprites: 0x80
+C 0x7536 baja recto hasta la Y 0x30
+C 0x753A gira cada 0x4 cuadros
+C 0x7573 en su X, arriba
+C 0x757A el dibujo de sus sprites: 0x98
+C 0x7582 baja recto hasta la Y 0x60
+C 0x7586 gira cada 0x20 cuadros
+C 0x758E sin vueltas hechas
+C 0x75B1 sin girar
+C 0x75B5 sus puntos: 60
+C 0x75BA el movimiento 4
+C 0x75BE la X del avion
+C 0x75C1 en la mitad izquierda?
+C 0x75C7 a su derecha: + 0x50
+C 0x75C9 sale con la direccion 0x2
+C 0x75CD gira hasta la direccion 0x5
+C 0x75D1 girando hacia atras (-1)
+C 0x75D7 a su izquierda: - 0x50
+C 0x75D9 sale con la direccion 0xE
+C 0x75DD gira hasta la direccion 0xB
+C 0x75E1 girando hacia delante (+1)
+C 0x75E5 en su X, arriba
+C 0x75EC el dibujo de sus sprites: 0x8C
+C 0x75F4 baja recto hasta la Y 0x30
+C 0x75F8 gira cada 0x3 cuadros
+C 0x7601 el movimiento 4
+C 0x7605 la X del avion
+C 0x7608 en la mitad izquierda?
+C 0x760E a su derecha: + 0x40
+C 0x7610 sale con la direccion 0x2
+C 0x7614 gira hasta la direccion 0x5
+C 0x7618 girando hacia delante (+1)
+C 0x761E a su izquierda: - 0x40
+C 0x7620 sale con la direccion 0xE
+C 0x7624 gira hasta la direccion 0xB
+C 0x7628 girando hacia atras (-1)
+C 0x762C en su X, arriba
+C 0x7633 el dibujo de sus sprites: 0x68
+C 0x763B baja recto hasta la Y 0x30
+C 0x763F gira cada 0x3 cuadros
+C 0x7648 el movimiento 4
+C 0x764C la X del avion
+C 0x764F en la mitad izquierda?
+C 0x7655 a su derecha: + 0x28
+C 0x7657 sale con la direccion 0x1
+C 0x765B gira hasta la direccion 0x4
+C 0x765F girando hacia atras (-1)
+C 0x7665 a su izquierda: - 0x28
+C 0x7667 sale con la direccion 0xF
+C 0x766B gira hasta la direccion 0xB
+C 0x766F girando hacia delante (+1)
+C 0x7673 en su X, arriba
+C 0x767A el dibujo de sus sprites: 0x5C
+C 0x7682 baja recto hasta la Y 0x30
+C 0x7686 gira cada 0x2 cuadros
+C 0x768F el movimiento 4
+C 0x7693 la X del avion
+C 0x7696 en la mitad izquierda?
+C 0x769C a su derecha: + 0x50
+C 0x769E sale con la direccion 0x3
+C 0x76A2 gira hasta la direccion 0xF
+C 0x76A6 girando hacia atras (-1)
+C 0x76AC a su izquierda: - 0x50
+C 0x76AE sale con la direccion 0xD
+C 0x76B2 gira hasta la direccion 0x1
+C 0x76B6 girando hacia delante (+1)
+C 0x76BA en su X, arriba
+C 0x76C1 el dibujo de sus sprites: 0x8C
+C 0x76C9 baja recto hasta la Y 0x30
+C 0x76CD gira cada 0x4 cuadros
+C 0x76D6 el movimiento 4
+C 0x76DA la X del avion
+C 0x76DD en la mitad izquierda?
+C 0x76E3 a su derecha: + 0x40
+C 0x76E5 sale con la direccion 0x2
+C 0x76E9 gira hasta la direccion 0x5
+C 0x76ED girando hacia atras (-1)
+C 0x76F3 a su izquierda: - 0x40
+C 0x76F5 sale con la direccion 0xE
+C 0x76F9 gira hasta la direccion 0x3
+C 0x76FD girando hacia delante (+1)
+C 0x7701 en su X, arriba
+C 0x7708 el dibujo de sus sprites: 0x68
+C 0x7710 baja recto hasta la Y 0x30
+C 0x7714 gira cada 0x4 cuadros
+C 0x7725 el movimiento 6
+C 0x7729 sale con la direccion 0x0
+C 0x772D gira hasta la direccion 0xB
+C 0x7731 girando hacia atras (-1)
+C 0x7735 en su X, arriba
+C 0x7738 su dibujo de frente: 0x50
+C 0x773C el dibujo de sus sprites: 0x68
+C 0x7740 su color: 0xA
+C 0x7744 baja recto hasta la Y 0x30
+C 0x7748 gira cada 0x3 cuadros
+C 0x774C sus puntos: 40
+C 0x7751 la X del avion
+C 0x7754 en la mitad izquierda?
+C 0x775A a su derecha: + 0x30
+C 0x775C sale con la direccion 0x1
+C 0x7760 gira hasta la direccion 0xE
+C 0x7766 a su izquierda: - 0x30
+C 0x776C gira hasta la direccion 0x2
+C 0x7774 en su X, arriba
+C 0x777B su dibujo de frente: 0x8C
+C 0x7783 baja recto hasta la Y 0x28
+C 0x7787 gira cada 0x28 cuadros
+C 0x7793 sin derribar
+C 0x7797 despacio
+C 0x7304 ya en marcha?
+C 0x730A los que hay que derribar
+C 0x7310 sus cifras
+C 0x7316 la fase 0?
+C 0x7319 la 1?
+C 0x731D la 2?
+C 0x7321 la 3?
+C 0x7325 la 4 o mas
+C 0x732A la demostracion?
+C 0x732E la de la fase 0
+C 0x7333 la de la fase 1
+C 0x7338 la de la fase 2
+C 0x733D la de la fase 3
+C 0x7342 la de las demas
+C 0x7349 su cuenta
+C 0x734B en 0xE485
+C 0x7350 en marcha (0xFF)
+C 0x7356 0x58 bytes
+C 0x7358 a cero
+C 0x7366 el grande derribado?
+C 0x7373 la fase 0?
+C 0x7376 la 1?
+C 0x737A la 2?
+C 0x737E las demas
+C 0x7383 en marcha?
+C 0x7393 en marcha?
+C 0x73A3 en marcha?
+C 0x73B3 en marcha?
+C 0x73C4 quedan?
+C 0x73CF la direccion
+C 0x73D3 a ella
+C 0x73D4 la entrada
+C 0x73D9 su cuenta
+C 0x73DE la espera
+C 0x73E1 la entrada
+C 0x73EB el tipo 5?
+C 0x73EF las demas: la siguiente
+C 0x73F5 un cuadro mas
+C 0x73FA la espera de la entrada (+1)
+C 0x73FE aun no
+C 0x73FF la espera a 0
+C 0x7406 ningun sitio: otra vez
+C 0x740F uno menos
+C 0x7423 en DE
+C 0x742A la rutina
+C 0x7451 guardados
+C 0x7459 0xFF?
+C 0x745F la direccion
+C 0x7462 a ella
+C 0x7466 de vuelta
+C 0x77A0 el final en marcha
+C 0x77A8 aun quedan
+C 0x77AC la ultima parte
+C 0x77B0 el aterrizaje, paso 1
+C 0x77B4 sin final
+C 0x77B7 la oleada otra vez
+C 0x77C0 64 bytes
+C 0x77C2 a cero
+C 0x77C8 el grande derribado
+C 0x77D0 aun quedan
+C 0x77D2 el repostaje
+C 0x77DC 0xFF
+C 0x77DF los que hay que derribar despues
+C 0x77E6 sus datos
+C 0x77ED libre?
+C 0x77F3 sus datos
+C 0x77F7 libre?
+C 0x7800 sus datos
+C 0x7804 libre?
+C 0x7813 sus datos
+C 0x7817 libre?
+C 0x781C ninguno: 0xFF
+C 0x783A no
+C 0x783F el siguiente
+C 0x784D en DE
+C 0x7853 + la tabla
+C 0x7857 a la rutina
+C 0x7881 toca al avion?
+C 0x7890 toca al avion?
+C 0x7872 toca al avion?
+C 0x786F (dos filas)
+C 0x787E una a la derecha
+C 0x788D una a la izquierda
+C 0x7899 0xE0?
+C 0x78A0 0xB0?
+C 0x78A4 aun en pantalla
+C 0x78BD ninguno
+C 0x78C1 el derribado
+C 0x78CB + la tabla
+C 0x78CF a la rutina
+C 0x78F2 hacia arriba (3-10)...
+C 0x78F6 ...no dispara
+C 0x7902 el paso 2?
+C 0x790D 0x40?
+C 0x791F aun no
+C 0x7922 la cuenta a 0
+C 0x792E la nueva
+C 0x7934 aun no
+C 0x8203 jugando
+C 0x8208 las vidas
+C 0x820E seis cifras
+C 0x8210 a cero
+C 0x8219 la fase 0
+C 0x821C las casillas de la fase
+C 0x8222 la RAM de la fase a cero
+C 0x8225 el sonido
+C 0x8228 la tabla de nombres en blanco
+C 0x8233 X 0x60
+C 0x8237 dibujo 0
+C 0x823B color 6
+C 0x8243 X 0x50
+C 0x8247 dibujo 4
+C 0x824B color 6
+C 0x8252 los botones a 0
+C 0x8259 la cuenta del combustible a 0
+C 0x825C el marcador
+C 0x8261 lleno
+C 0x8264 su barra
+C 0x8272 su byte
+C 0x8276 el color del suelo
+C 0x8279 las rayas del suelo
+C 0x827C el horizonte en la fila 10
+C 0x8282 los sprites de la fase
+C 0x8285 el suelo
+C 0x8288 12 filas
+C 0x828A la pista
+C 0x828D el paisaje
+C 0x829D la espera
+C 0x82A0 la demostracion?
+C 0x82BF el repostaje
+C 0x82D5 aterrizado
+C 0x82E8 el boton, gastado
+C 0x82F8 a cero
+C 0x82FC los enemigos
+C 0x8308 SPEED y FUEL
+C 0x830B ALTI
+C 0x8311 la pista que se aleja: empieza?
+C 0x8314 y sigue
+C 0x8317 el aterrizaje
+C 0x8334 a los puntos
+C 0x8344 23 casillas
+C 0x8347 LDIRVM
+C 0x834C el sonido 2 de B y C
+C 0x8357 23 casillas
+C 0x835A LDIRVM
+C 0x836B ya no despega
+C 0x8379 la cuenta a 0
+C 0x8381 color 8 en el segundo sprite
+C 0x838E los dos sprites
+C 0x8395 el dibujo 0x14
+C 0x83A5 a 0
+C 0x83AC la altura
+C 0x83B2 un paso mas
+L 0x8F3F paisaje_en                 El paisaje en la fila DE (0x90E2 lo usa con otra fila)
+L 0x90D5 pista_aleja_casilla
