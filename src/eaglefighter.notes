@@ -1282,7 +1282,6 @@ C 0x71D5 las Y
 C 0x71E3 a menos de 6?
 C 0x71E7 se tocan
 L 0x71EA toca_no
-L 0x71EC enemigo_cae               El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explosion (0x727D, 0x72AF, 0x72B5), 4 cuadros cada uno; despues desaparece, da sus puntos (+0x1B; desde la fase 7, 16 mas por fase) y quedan uno menos por derribar (0xE484, 0xE1CA, BCD); a 0, en las fases 0 y 1, el final (0x77A0); en las demas, el del tipo 5 (0x77C8)
 C 0x71EC el paso
 C 0x71FD fuera
 C 0x7219 jugando?
@@ -1936,7 +1935,6 @@ C 0x7209 ...sus datos libres
 C 0x7215 +0x16 a 0
 C 0x721C la demostracion: sin puntos
 C 0x7222 hasta la fase 6...
-C 0x7229 (x 16)
 C 0x722F guardados
 C 0x7236 las centenas
 C 0x7246 a los puntos
@@ -2264,3 +2262,5 @@ C 0x83AC la altura
 C 0x83B2 un paso mas
 L 0x8F3F paisaje_en                 El paisaje en la fila DE (0x90E2 lo usa con otra fila)
 L 0x90D5 pista_aleja_casilla
+L 0x71EC enemigo_cae               El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explosion (0x727D, 0x72AF, 0x72B5), 4 cuadros cada uno; despues desaparece, da sus puntos (+0x1B; desde la fase 7, 0x10 BCD mas por fase: 10 puntos) y quedan uno menos por derribar (0xE484, 0xE1CA, BCD); a 0, en las fases 0 y 1, el final (0x77A0); en las demas, el del tipo 5 (0x77C8)
+C 0x7229 (x 16: 0x10 en BCD son 10 puntos)

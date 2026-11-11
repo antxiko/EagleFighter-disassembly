@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eagle Fighter - desensamblado comentado</title>
+<style>
+:root{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;--linea:#23262e;
+  --rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+@media (prefers-color-scheme:light){:root{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;
+  --panel:#f7f6f2;--linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}}
+:root[data-theme="dark"]{--tinta:#cfd0d4;--suave:#83868f;--fondo:#000;--panel:#0c0e13;
+  --linea:#23262e;--rojo:#ff897d;--cyan:#65dbef;--verde:#3eb849;--oro:#ded087}
+:root[data-theme="light"]{--tinta:#191a1e;--suave:#5a5d66;--fondo:#e9e7e1;--panel:#f7f6f2;
+  --linea:#d0cdc5;--rojo:#b23f34;--cyan:#1c6b7c;--verde:#2b7734;--oro:#8a7420}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);padding:0 1.25rem 6rem;
+  font:15px/1.7 ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.w{max-width:1120px;margin:0 auto}
+.n{max-width:68ch}
+h1,h2,h3,h4{font-weight:400;text-wrap:balance}
+a{color:var(--cyan)}
+img{image-rendering:pixelated;max-width:100%;height:auto;display:block}
+header.top{display:flex;flex-direction:column;align-items:center;gap:1.5rem;
+  padding:4rem 0 2rem;text-align:center}
+header.top img{width:min(100%,642px)}
+.claim{max-width:60ch;color:var(--suave);font-size:1.05rem}
+.claim b{color:var(--tinta);font-weight:400}
+.ficha{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.5rem;width:100%;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:.85rem 0}
+.ficha b{color:var(--rojo);font-weight:400}
+nav{display:flex;flex-wrap:wrap;gap:1.25rem;justify-content:center;padding:1.25rem 0;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+nav a{color:var(--suave);text-decoration:none;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus{color:var(--tinta);border-bottom-color:var(--rojo)}
+nav.docs{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
+  margin-bottom:1rem}
+section{margin-top:4.5rem;scroll-margin-top:1rem}
+section>h2{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;
+  border-left:3px solid var(--rojo);padding-left:.9rem;margin:0 0 1.5rem}
+.cifras{display:grid;gap:1px;background:var(--linea);border:1px solid var(--linea);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.cifra{background:var(--panel);padding:1.1rem}
+.cifra b{display:block;font-size:1.7rem;color:var(--oro);font-weight:400;
+  font-variant-numeric:tabular-nums;line-height:1.2}
+.cifra span{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--suave)}
+.hall{border-top:1px solid var(--linea);padding-top:1.75rem;margin-top:2.5rem}
+.hall:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.hall h3{margin:0 0 .75rem;font-size:1.15rem;color:var(--rojo)}
+.hall h4{color:var(--oro);margin:1.5rem 0 .5rem;font-size:.95rem}
+.hall p{margin:0 0 1rem}
+pre.asm{background:var(--panel);border-left:2px solid var(--verde);margin:1.25rem 0;
+  padding:1rem 1.1rem;overflow-x:auto;font-size:13px;line-height:1.6;color:var(--tinta)}
+.par{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:820px){.par{grid-template-columns:1fr 1fr}}
+.par figure{margin:0}
+table{border-collapse:collapse;width:100%;margin:1.25rem 0;font-size:13px;display:block;
+  overflow-x:auto}
+th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--linea)}
+th{color:var(--suave);font-weight:400;font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+td.num{font-variant-numeric:tabular-nums;color:var(--oro)}
+.nivel{margin-top:2rem}
+.nivel h3{margin:0 0 .9rem;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase}
+.nivel em{color:var(--cyan);font-style:normal}
+.sep{color:var(--suave);margin:0 .6rem}
+.rejilla{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.rejilla figure{margin:0;background:var(--panel);box-shadow:0 0 0 1px var(--linea)}
+.rejilla figcaption{display:flex;justify-content:space-between;padding:.45rem .65rem;
+  font-size:11px;color:var(--suave);border-top:1px solid var(--linea)}
+.dir{font-variant-numeric:tabular-nums;color:var(--verde)}
+footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--linea);
+  color:var(--suave);font-size:12px}
+
+/* Aviso de trabajo en curso: tiene que verse antes que las cifras, porque un
+   100% mal leido hace mas dano que no ponerlo. */
+.aviso{background:#3a2a10;border-left:3px solid var(--oro);margin:1.5rem auto;
+  padding:1rem 1.2rem;max-width:900px;border-radius:4px}
+.aviso p{margin:0;color:var(--tinta);font-size:15px;line-height:1.65}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;margin:1.5rem 0}
+.galeria figure{margin:0}
+.galeria img{width:100%;height:auto;image-rendering:pixelated;
+  border:1px solid var(--linea);border-radius:3px}
+.galeria figcaption{color:var(--suave);font-size:13px;margin-top:.5rem}
+audio{display:block;width:100%;max-width:640px;margin:.75rem 0 1.5rem}
+</style>
+<header class="top">
+  <img src="data:image/png;base64,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" alt="Eagle Fighter">
+  <p class="claim">Un caza despega de una pista en perspectiva, derriba las oleadas de aviones enemigos, vuelve y aterriza; el combustible se gasta y lo que queda se cobra en puntos. Diecis&eacute;is fases. El t&iacute;tulo sale de ejecutar la ROM, cotejado con openMSX; la partida en GIF, jugada en openMSX por un piloto que despega, combate y aterriza; las m&uacute;sicas, de su propio motor; las cuatro que suenan, id&eacute;nticas a openMSX cuadro a cuadro.</p>
+  <p class="ficha">Casio - <b>(c) 1985</b> - Cartucho de <b>24 KB</b> (cabecera en 0x8000) - <b>MSX</b> - Volcado <b>d916f0e4...</b></p>
+</header>
+<p class="ficha" style="border:1px solid var(--oro);padding:.8em 1em;margin:1.5em 0">
+<b>Aqu&iacute; no hay capturas del juego.</b> El t&iacute;tulo sale de ejecutar la ROM (cotejado con openMSX) y los GIF son la ROM <b>funcionando en openMSX</b>: en cada cuadro se apuntan la VRAM, la RAM y los registros del VDP, y <b>c&oacute;digo nuestro los pinta</b>.</p>
+<nav><a href="LA-PARTIDA.html">La partida</a><a href="LAS-FASES.html">Las fases</a><a href="LOS-TEXTOS.html">Los textos</a><a href="LA-MUSICA.html">La m&uacute;sica</a><span style="opacity:.35">|</span><a href="CURIOSIDADES.html">Curiosidades</a><span style="opacity:.35">|</span><a href="POR-DENTRO.html">Por dentro</a><a href="../" style="margin-left:auto;color:var(--oro)">In English</a></nav>
+<section id="numbers">
+  <h2>El cartucho en cifras</h2>
+  <div class="cifras"><div class="cifra"><b>100 %</b><span>del binario explicado</span></div><div class="cifra"><b>533</b><span>rutinas y etiquetas</span></div><div class="cifra"><b>40,0 %</b><span>del listado comentado</span></div><div class="cifra"><b>9.880</b><span>bytes de código</span></div><div class="cifra"><b>22.888</b><span>bytes de datos</span></div><div class="cifra"><b>0</b><span>bytes sin identificar</span></div></div>
+</section>
+<section id="pages"><h2>Lo que hay dentro</h2><div class="hall"><h3>El juego</h3><ul><li><a href="LA-PARTIDA.html">La partida</a>: el t&iacute;tulo, los mandos, el despegue, el combate, el aterrizaje, el combustible, las vidas y los puntos.</li><li><a href="LAS-FASES.html">Las fases</a>: las diecis&eacute;is fases, las oleadas, los enemigos y c&oacute;mo se mueven.</li><li><a href="LOS-TEXTOS.html">Los textos</a>: todos los textos de la ROM, con su traducci&oacute;n.</li><li><a href="LA-MUSICA.html">La m&uacute;sica</a>: las cinco m&uacute;sicas, de su propio motor de sonido y cotejadas con openMSX.</li></ul></div><div class="hall"><h3>Curiosidades</h3><ul><li><a href="CURIOSIDADES.html">Curiosidades</a>: SCORE dentro de HISCORE, c&oacute;digo que nadie llama, una m&uacute;sica que nadie pide, la palanca m&aacute;s los cursores.</li></ul></div><div class="hall"><h3>Por dentro</h3><ul><li><a href="POR-DENTRO.html">Por dentro</a>: rehacer la ROM, el cartucho, la BIOS que usa, el bucle, la RAM y las herramientas.</li></ul></div></section>
+<footer><p>Esto es trabajo de documentación y preservación: el código y los gráficos siguen siendo de sus autores y de Casio, y la imagen del cartucho no se distribuye.</p></footer>

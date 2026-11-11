@@ -1055,7 +1055,7 @@ L_71E3:
 toca_no:
 	xor a			;71ea   ; no se tocan
 	ret			;71eb
-enemigo_cae:		; El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explosion (0x727D, 0x72AF, 0x72B5), 4 cuadros cada uno; despues desaparece, da sus puntos (+0x1B; desde la fase 7, 16 mas por fase) y quedan uno menos por derribar (0xE484, 0xE1CA, BCD); a 0, en las fases 0 y 1, el final (0x77A0); en las demas, el del tipo 5 (0x77C8)
+enemigo_cae:		; El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explosion (0x727D, 0x72AF, 0x72B5), 4 cuadros cada uno; despues desaparece, da sus puntos (+0x1B; desde la fase 7, 0x10 BCD mas por fase: 10 puntos) y quedan uno menos por derribar (0xE484, 0xE1CA, BCD); a 0, en las fases 0 y 1, el final (0x77A0); en las demas, el del tipo 5 (0x77C8)
 	ld a,(iy+008h)		;71ec   ; el paso
 	and a			;71ef
 	jp z,explosion1		;71f0
@@ -1078,7 +1078,7 @@ enemigo_cae:		; El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explo
 	jr c,enemigo_cae_puntos_fijos		;7224
 	jr z,enemigo_cae_puntos_fijos		;7226   ; ...hasta la 6: sus puntos sin mas
 	rlca			;7228   ; x 16
-	rlca			;7229   ; (x 16)
+	rlca			;7229   ; (x 16: 0x10 en BCD son 10 puntos)
 	rlca			;722a
 	rlca			;722b
 	add a,(iy+01bh)		;722c   ; + sus puntos
