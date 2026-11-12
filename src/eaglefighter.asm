@@ -4928,7 +4928,7 @@ espera_va:
 	ret			;95e5
 nave_cae:		; La nave tocada (0xE19B): el sonido parado, la musica 3; la nave parpadea (sus dibujos cada 4 cuadros) 160 cuadros; despues una vida menos y otra vez la fase (0x821F); sin vidas, GAME OVER (0x967A)
 	call sonido_para		;95e6   ; el sonido parado
-	ld a,(ix+001h)		;95e9   ; la nave: 6 arriba...
+	ld a,(ix+001h)		;95e9   ; la nave: 6 a la izquierda (la X)...
 	sub 006h		;95ec
 	ld (ix+001h),a		;95ee
 	ld a,(ix+005h)		;95f1   ; ...y su segundo sprite 5 a la derecha

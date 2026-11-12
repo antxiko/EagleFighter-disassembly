@@ -429,7 +429,7 @@ C 0x95DB los que tocan
 C 0x95DF los que van
 L 0x95E6 nave_cae                  La nave tocada (0xE19B): el sonido parado, la musica 3; la nave parpadea (sus dibujos cada 4 cuadros) 160 cuadros; despues una vida menos y otra vez la fase (0x821F); sin vidas, GAME OVER (0x967A)
 C 0x95E6 el sonido parado
-C 0x95E9 la nave: 6 arriba...
+C 0x95E9 la nave: 6 a la izquierda (la X)...
 C 0x95F1 ...y su segundo sprite 5 a la derecha
 C 0x95F9 la cuenta y 0xE19E a cero
 C 0x9603 la musica 3
