@@ -88,7 +88,10 @@ PAGINAS = [
     [("CURIOSITIES.html", "CURIOSIDADES.html", "Curiosities", "Curiosidades",
       "SCORE inside HISCORE, code nobody calls, a tune nobody asks for, the stick plus the cursors",
       "SCORE dentro de HISCORE, c&oacute;digo que nadie llama, una m&uacute;sica que nadie pide, la palanca m&aacute;s "
-      "los cursores")],
+      "los cursores"),
+     ("SECRETS-AND-BUGS.html", "SECRETOS-Y-FALLOS.html", "Secrets and bugs", "Secretos y fallos",
+      "what was searched for: no hidden keys, the big one worth 0 on stage 14, the cursor keys and joystick added, and a score with no cap",
+      "lo que se ha buscado: ninguna tecla escondida, el grande que vale 0 en la fase 14, los cursores y el mando sumados, y unos puntos sin tope")],
     [("UNDER-THE-HOOD.html", "POR-DENTRO.html", "Under the hood", "Por dentro",
       "rebuilding the ROM, the cartridge, the BIOS it uses, the main loop, the RAM and the tools",
       "rehacer la ROM, el cartucho, la BIOS que usa, el bucle, la RAM y las herramientas")],

@@ -1288,7 +1288,7 @@ C 0x7219 jugando?
 C 0x721F la fase - 6...
 C 0x7226 ...hasta la 6: sus puntos sin mas
 C 0x7228 x 16
-C 0x722C + sus puntos
+C 0x722C + sus puntos (en binario: el grande, 0x90, pasa de 0xFF desde la fase 14 y pierde el acarreo)
 C 0x7230 100 o mas?
 C 0x7234 100 puntos...
 C 0x723A ...y el resto

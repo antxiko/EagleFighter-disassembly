@@ -1081,7 +1081,7 @@ enemigo_cae:		; El enemigo IX derribado (+8 el paso): los pasos 0-2 son la explo
 	rlca			;7229   ; (x 16: 0x10 en BCD son 10 puntos)
 	rlca			;722a
 	rlca			;722b
-	add a,(iy+01bh)		;722c   ; + sus puntos
+	add a,(iy+01bh)		;722c   ; + sus puntos (en binario: el grande, 0x90, pasa de 0xFF desde la fase 14 y pierde el acarreo)
 	push af			;722f   ; guardados
 	sub 0a0h		;7230   ; 100 o mas?
 	jr c,enemigo_cae_puntos		;7232
