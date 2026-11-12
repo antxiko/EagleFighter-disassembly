@@ -61,7 +61,12 @@ runway before taking off, it crashes.
 
 From stage 3 on, the code has an in-flight refuelling: after the big enemy, a tanker drawn with tiles comes down
 from the top of the screen, four warnings, and with the plane underneath and the stick down the tank fills up
-(`cisterna`, 0x8B08). **No recording reached it**: it is described from the code.
+(`cisterna`, 0x8B08). To see it, **it had to be forced** in openMSX (`tools/guiones/repostaje.tcl`): the game starts on stage 3 and the big
+plane is taken as shot down (0xE483 = 1); the rest is the game. The plane waits centred at mid height and climbs on
+the fourth warning: higher too early, it crashes (0x8B8C). Hooked, the fuel goes from 0x93 to 0xC0 and the tanker
+leaves:
+
+![The in-flight refuelling, forced](imagenes/repostaje.gif)
 
 ## The landing
 

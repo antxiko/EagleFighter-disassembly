@@ -61,7 +61,12 @@ en la pista, antes de despegar, se estrella.
 
 Desde la fase 3, el código tiene un repostaje en vuelo: después del enemigo grande, un avión cisterna dibujado con
 casillas baja desde arriba de la pantalla, cuatro avisos, y con el avión debajo y la palanca abajo el depósito se
-llena (`cisterna`, 0x8B08). **Ninguna grabación ha llegado hasta él**: está contado desde el código.
+llena (`cisterna`, 0x8B08). Para verlo **hubo que forzarlo** en openMSX (`tools/guiones/repostaje.tcl`): la partida empieza en la fase 3 y el
+avión grande se da por derribado (0xE483 = 1); lo demás es el juego. El avión espera centrado a media altura y sube
+con el cuarto aviso: más arriba antes de tiempo, se estrella (0x8B8C). Enganchado, el combustible sube de 0x93 a 0xC0
+y la cisterna se va:
+
+![El repostaje en vuelo, forzado](../imagenes/repostaje.gif)
 
 ## El aterrizaje
 

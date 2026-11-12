@@ -9,6 +9,8 @@ aterrizando (3), 0xE19D la ultima parte (2), 0xE19B estrellado, 0xE1AD aterrizad
   partida    un piloto sencillo (tools/guiones/partida.tcl): acelera centrado, despega, dispara, aterriza y frena;
              la fase 2 y GAME OVER
   gameover   el avion se sale de la pista tres veces
+  repostaje  FORZADO (tools/guiones/repostaje.tcl): la partida empieza en la fase 3 y el avion grande se da por
+             derribado (0xE483 = 1); el piloto se pone bajo la cisterna y sube con el cuarto aviso
 
 Uso: gifs.py docs/imagenes
 """
@@ -27,6 +29,7 @@ TRAMOS = [
     ("aterrizaje.gif", "partida", 1918, 2470, 2),        # LANDING: baja hasta la pista, toca y frena
     ("landing_bonus.gif", "partida", 2470, 2780, 2),     # LANDING BONUS: el combustible que queda, en puntos
     ("fase2.gif", "partida", 4000, 4280, 2),             # la fase 2: el mar y las nubes; le dan
+    ("repostaje.gif", "repostaje", 1360, 2120, 2),       # FORZADO: la cisterna baja, avisos, enganche y lleno
     ("fuera.gif", "gameover", 560, 920, 2),              # se sale de la pista y se estrella
     ("game_over.gif", "partida", 7400, 7800, 2),         # la ultima vida y GAME OVER
 ]
@@ -34,7 +37,10 @@ TRAMOS = [
 
 def main(salida):
     raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    solo = sys.argv[2:]
     for fichero, grab, desde, hasta, cada in TRAMOS:
+        if solo and fichero not in solo:
+            continue
         n, s = vdp.gif(os.path.join(raiz, "work", grab + ".bin"),
                        os.path.join(salida, fichero), desde, hasta, cada=cada, tope_ms=4000)
         print("%-20s %4d imagenes, %5.1f s, %8d bytes" % (
