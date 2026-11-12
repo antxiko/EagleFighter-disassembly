@@ -28,6 +28,19 @@ nubes.
 
 ![La fase 2: el mar y las nubes; le dan](../imagenes/fase2.gif)
 
+## Las dieciséis pantallas
+
+La pantalla con la que empieza cada fase, con el avión parado en la pista, a la mitad de tamaño. Están **pintadas
+ejecutando la ROM** (`tools/pantallas_fases.py`): `fase_empieza` (0x821C) hasta antes de encender la pantalla, con la
+fase en 0xE00A, monta las casillas, el marcador, el color del suelo, las rayas, la pista y el paisaje. El juego no
+tiene mapa: el suelo es siempre el mismo, y lo que cambia de una fase a otra es su color y el paisaje del horizonte,
+que se repiten cada ocho fases.
+
+Cotejo: la grabación solo llega a las fases 1 y 2; la 1 sale **igual** a un cuadro grabado, casilla a casilla y color
+a color, y la 2 con 3 casillas distintas.
+
+![Las dieciséis fases](../imagenes/fases.png)
+
 ## Las oleadas
 
 Una oleada es una lista de entradas de tres bytes: el tipo de enemigo, la espera entre uno y otro y cuántos; 0xFF

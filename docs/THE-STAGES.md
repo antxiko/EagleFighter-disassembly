@@ -28,6 +28,19 @@ blue sea with clouds.
 
 ![Stage 2: the sea and the clouds; a hit](imagenes/fase2.gif)
 
+## The sixteen screens
+
+The screen each stage starts with, the plane standing on the runway, at half size. They are **drawn by running the
+ROM** (`tools/pantallas_fases.py`): `fase_empieza` (0x821C) up to just before the screen is switched on, with the
+stage in 0xE00A, builds the tiles, the scoreboard, the ground colour, the stripes, the runway and the landscape. The
+game has no map: the ground is always the same, and what changes from one stage to another is its colour and the
+horizon landscape, which repeat every eight stages.
+
+Check: the recording only reaches stages 1 and 2; stage 1 comes out **identical** to a recorded frame, tile for tile
+and colour for colour, and stage 2 with 3 differing tiles.
+
+![The sixteen stages](imagenes/fases.png)
+
 ## The waves
 
 A wave is a list of entries of three bytes: the enemy type, the wait between one and the next and how many; 0xFF
